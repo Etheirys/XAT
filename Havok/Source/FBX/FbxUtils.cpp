@@ -48,7 +48,7 @@ FbxBoneMap FbxBoneMap::Create(FbxScene* scene)
 		if (attrib)
 		{
 			FbxNodeAttribute::EType attributeType = attrib->GetAttributeType();
-			if (attributeType == FbxNodeAttribute::eSkeleton || (attributeType == FbxNodeAttribute::eNull && nodeName == "n_root")) // Blender has a bug where it strips eSkeleton
+			if (attributeType == FbxNodeAttribute::eSkeleton || (attributeType == FbxNodeAttribute::eNull)) // Blender has a bug where it strips eSkeleton from roots
 			{
 				map.data.push_back(std::make_pair(nodeName, node));
 			}
