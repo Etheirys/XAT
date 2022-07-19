@@ -1,0 +1,238 @@
+﻿<UserControl x:Class="XAT.Views.AnimationTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:XAT.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="515" d:DesignWidth="900">
+    <Grid Name="ContentArea">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <GroupBox Header="Input">
+                <StackPanel>
+                    <local:FileChooser Hint="Source Animation" HelperText="The .pap containing the animation." FileDialogMode="Open" FileFilter="Pap File (*.pap)|*.pap" IsReadOnly="True" Text="{Binding PapPath}" />
+
+                    <Separator Opacity="0" Height="20"/>
+
+                    <local:FileChooser Hint="Source Skeleton" HelperText="The .sklb the animation is bound to."  FileDialogMode="Open" FileFilter="Sklb File (*.sklb)|*.sklb" IsReadOnly="True" Text="{Binding SklbPath}" />
+
+                    <Separator Opacity="0" Height="20"/>
+
+                    <Button Command="{Binding LoadSource}" Content="Load" />
+
+                </StackPanel>
+            </GroupBox>
+
+            <Separator Opacity="0" Height="10" />
+
+            <GroupBox Grid.Row="2" Grid.Column="0" Header="Output" IsEnabled="{Binding IsLoaded}">
+                <StackPanel>
+                    <local:FileChooser Hint="Target Animation" HelperText="The pap to save to." FileDialogMode="Save" FileFilter="Pap File (*.pap)|*.pap" IsReadOnly="True" Text="{Binding OutputPath}"/>
+                    <Separator Opacity="0" Height="20"/>
+                    <Button IsEnabled="{Binding OutputPath, Converter={StaticResource NotNullToBoolConverter}}" Command="{Binding SaveOutput}" Content="Save" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <GroupBox Header="Global" IsEnabled="{Binding IsLoaded}">
+                <StackPanel>
+                    <TextBlock Text="{Binding LoadedPap.HavokData.Length, StringFormat= 'Havok Length: {0}'}" />
+                    <TextBlock Text="{Binding LoadedPap.TimelineData.Length, StringFormat= 'Timeline Length: {0}'}" />
+
+                    <Separator Opacity="0" Height="5"/>
+                    <TextBox Text="{Binding LoadedPap.Skeleton}" materialDesign:HintAssist.Hint="Skeleton" materialDesign:HintAssist.HelperText="The skeleton this pap targets." />
+
+                    <Separator Opacity="0" Height="20"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Separator Opacity="0" Height="10"/>
+
+            <GroupBox Header="Animation Data">
+                <StackPanel>
+                    <ComboBox VerticalAlignment="Top" ItemsSource="{Binding LoadedPap.AnimInfos}" SelectedItem="{Binding SelectedAnimation, Mode=TwoWay}" IsEnabled="{Binding IsLoaded}" />
+                    <StackPanel IsEnabled="{Binding SelectedAnimation, Converter={StaticResource NotNullToBoolConverter}}">
+                        <Separator Opacity="0" Height="5"/>
+                        <TextBlock Text="{Binding SelectedAnimation.HavokIndex, StringFormat= 'Havok Index: {0}'}" />
+
+                        <Separator Opacity="0" Height="5"/>
+
+                        <TabControl materialDesign:ShadowAssist.ShadowEdges="None">
+                            <TabControl.ContentTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1, 0, 1, 1" Padding="5">
+                                        <ContentPresenter Content="{Binding}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </TabControl.ContentTemplate>
+
+                            <!-- Export -->
+                            <TabItem Header="Export">
+                                <StackPanel>
+                                    <local:FileChooser Hint="Export File" HelperText="The target export file location." FileFilter="{Binding FileTypeFilters, Mode=OneTime}" FileDialogMode="Save" IsReadOnly="True" Text="{Binding ExportPath}"/>
+
+                                    <!-- Havok file Export Settings -->
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SelectedExportType}" Value="HavokTagFile" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding SelectedExportType}" Value="HavokPackFile" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding SelectedExportType}" Value="HavokXMLFile" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <Separator Opacity="0" Height="25" />
+                                        <CheckBox Content="Bundle Skeleton?" IsChecked="{Binding HavokBundleSkeleton}" />
+
+                                    </StackPanel>
+
+                                    <Separator Opacity="0" Height="20"/>
+                                    <Button Command="{Binding ExportAnimation}" Content="Export"  IsEnabled="{Binding SelectedExportType, Converter={StaticResource NotNullToBoolConverter}}"/>
+                                </StackPanel>
+                            </TabItem>
+
+                            <!-- Import -->
+                            <TabItem Header="Import">
+                                <StackPanel>
+                                    <local:FileChooser Hint="Import File" HelperText="The source import file location." FileFilter="{Binding FileTypeFilters, Mode=OneTime}" FileDialogMode="Open" IsReadOnly="True" Text="{Binding ImportPath}"/>
+
+                                    <Separator Opacity="0" Height="20"/>
+                                    <ComboBox VerticalAlignment="Top" materialDesign:HintAssist.Hint="Track" materialDesign:HintAssist.HelperText="The animation track to import." ItemsSource="{Binding ImportTracks}" SelectedItem="{Binding SelectedImportTrack}" IsEnabled="{Binding ImportTracks.Count, Converter={StaticResource NotZeroToBoolConverter}}" />
+
+                                    <Separator Opacity="0" Height="20"/>
+                                    <Grid>
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SelectedImportType}" Value="FBX" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding ExcludedBones.Count, StringFormat= 'Excluded Bones: {0}'}" FontWeight="Normal" />
+                                        <Button Grid.Column="2" Command="{Binding ShowExcludedBonesPopup}">
+                                            <materialDesign:PackIcon Kind="Bone" Margin="-8" />
+                                        </Button>
+                                    </Grid>
+
+                                    <Separator Opacity="0" Height="10"/>
+                                    <Button Command="{Binding ImportAnimation}" Content="Import" IsEnabled="{Binding SelectedImportTrackIndex, Converter={StaticResource NotNullToBoolConverter}}"/>
+                                </StackPanel>
+                            </TabItem>
+
+                            <!-- Compression -->
+                            <TabItem Header="Compress">
+                                <StackPanel>
+                                    <ComboBox ItemsSource="{Binding CompressionTypes, Mode=OneTime}" SelectedValue="{Binding SelectedCompressionType}" materialDesign:HintAssist.HelperText="The compression type to use." />
+
+                                    <Separator Opacity="0" Height="20" />
+
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SelectedCompressionType}" Value="Predictive" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding SelectedCompressionType}" Value="Quantized" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Column="0" materialDesign:HintAssist.HelperText="Translation Tolerance" Text="{Binding CompressionTolerances.StaticTranslationTolerance}" />
+                                            <TextBox Grid.Column="1" materialDesign:HintAssist.HelperText="Rotation Tolerance" Text="{Binding CompressionTolerances.StaticRotationTolerance}" />
+                                            <TextBox Grid.Column="2" materialDesign:HintAssist.HelperText="Scale Tolerance" Text="{Binding CompressionTolerances.StaticScaleTolerance}" />
+                                        </Grid>
+                                        <Separator Opacity="0" Height="20" />
+                                    </StackPanel>
+
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SelectedCompressionType}" Value="Predictive" >
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Column="0" materialDesign:HintAssist.HelperText="Dynamic Translation Tolerance" Text="{Binding CompressionTolerances.DynamicTranslationTolerance}" />
+                                            <TextBox Grid.Column="1" materialDesign:HintAssist.HelperText="Dynamic Rotation Tolerance" Text="{Binding CompressionTolerances.DynamicRotationTolerance}" />
+                                            <TextBox Grid.Column="2" materialDesign:HintAssist.HelperText="Dynamic Scale Tolerance" Text="{Binding CompressionTolerances.DynamicScaleTolerance}" />
+                                        </Grid>
+
+                                        <Separator Opacity="0" Height="20" />
+                                    </StackPanel>
+
+                                    <Button Command="{Binding Compress}" IsEnabled="{Binding SelectedCompressionType, Converter={StaticResource NotNullToBoolConverter}}">Compress</Button>
+                                </StackPanel>
+                            </TabItem>
+
+                            <!-- Advanced -->
+                            <TabItem Header="Advanced">
+                                <StackPanel>
+                                    <TextBox Text="{Binding SelectedAnimation.Name}" materialDesign:HintAssist.Hint="Animation Name" materialDesign:HintAssist.HelperText="The name of this animation." />
+
+                                    <Separator Opacity="0" Height="20"/>
+                                    <TextBox Text="{Binding SelectedAnimation.HavokIndex}" materialDesign:HintAssist.Hint="Havok Index" materialDesign:HintAssist.HelperText="The havok index this animation is linked to." />
+
+                                    <Separator Opacity="0" Height="20"/>
+                                </StackPanel>
+                            </TabItem>
+                        </TabControl>
+
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

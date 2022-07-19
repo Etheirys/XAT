@@ -1,0 +1,46 @@
+name: Publish XAT
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Generated version
+      uses: josStorer/get-current-time@v2
+      id: version-date
+      with:
+        format: YY.DDD.HHmm
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    - name: Install .NET
+      uses: actions/setup-dotnet@v1.8.2
+      with:
+        dotnet-version: 6.0.x
+   
+    - name: Deploy XAT
+      run: dotnet publish XAT/XAT.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish /p:Version=${{ steps.version-date.outputs.formattedTime }}
+      
+    - name: Zip Release
+      uses: TheDoctor0/zip-release@0.6.0
+      with:
+        filename: '../XAT.zip'
+        directory: './publish/'
+        exclusions: '*.pdb* *.xml*'
+        
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        artifacts: "XAT.zip"
+        name: ${{ steps.version-date.outputs.formattedTime }}
+        tag: v${{ steps.version-date.outputs.formattedTime }}
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}

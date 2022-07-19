@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3363A908-4A18-419E-B486-19762DA16E18}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>XATHavokInterop</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\;$(FBX_SDK_ROOT)\include;$(HAVOK_SDK_ROOT)\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>hkBase.lib;hkSerialize.lib;hkSceneData.lib;hkVisualize.lib;hkInternal.lib;hkImageUtilities.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkGeometryUtilities.lib;hkCompat.lib;libfbxsdk-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HAVOK_SDK_ROOT)\Lib\win32_vs2012_win7_noSimd\debug;$(FBX_SDK_ROOT)\lib\vs2012\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\;$(FBX_SDK_ROOT)\include;$(HAVOK_SDK_ROOT)\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>hkBase.lib;hkSerialize.lib;hkSceneData.lib;hkVisualize.lib;hkInternal.lib;hkImageUtilities.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkGeometryUtilities.lib;hkCompat.lib;libfbxsdk-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HAVOK_SDK_ROOT)\Lib\win32_vs2012_win7_noSimd\release;$(FBX_SDK_ROOT)\lib\vs2012\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Commands.cpp" />
+    <ClCompile Include="Source\Conversion\FbxToHavok.cpp" />
+    <ClCompile Include="Source\Conversion\HavokToFbx.cpp" />
+    <ClCompile Include="Source\FBX\FbxSystem.cpp" />
+    <ClCompile Include="Source\FBX\FbxUtils.cpp" />
+    <ClCompile Include="Source\Havok\HavokSystem.cpp" />
+    <ClCompile Include="Source\Havok\HavokUtils.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Utils\IOUtils.cpp" />
+    <ClCompile Include="Source\Utils\Math.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Commands.hpp" />
+    <ClInclude Include="Source\Conversion\FbxToHavok.hpp" />
+    <ClInclude Include="Source\Conversion\HavokToFbx.hpp" />
+    <ClInclude Include="Source\FatalException.hpp" />
+    <ClInclude Include="Source\FBX\FbxSystem.hpp" />
+    <ClInclude Include="Source\FBX\FbxUtils.hpp" />
+    <ClInclude Include="Source\Havok\HavokHeaders.hpp" />
+    <ClInclude Include="Source\Havok\HavokSystem.hpp" />
+    <ClInclude Include="Source\Havok\HavokUtils.hpp" />
+    <ClInclude Include="Source\Utils\IOUtils.hpp" />
+    <ClInclude Include="Source\Utils\Math.hpp" />
+    <ClInclude Include="Source\Utils\Singleton.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

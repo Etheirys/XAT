@@ -1,0 +1,12 @@
+publish/
+\.vs/
+\.idea/
+TestResults/
+packages/
+*.user
+bin/
+obj/
+*.suo
+*.sdf
+*.opensdf
+*.pdb

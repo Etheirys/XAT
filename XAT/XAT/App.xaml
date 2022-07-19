@@ -1,0 +1,21 @@
+﻿<Application x:Class="XAT.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:XAT"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:converters="clr-namespace:XAT.Utils.WPF.Converters"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup" DispatcherUnhandledException="Application_DispatcherUnhandledException">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+            <converters:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
+            <converters:NotZeroToBoolConverter x:Key="NotZeroToBoolConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Commands.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Conversion\HavokToFbx.cpp">
+      <Filter>Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Conversion\FbxToHavok.cpp">
+      <Filter>Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FBX\FbxUtils.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FBX\FbxSystem.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Havok\HavokSystem.cpp">
+      <Filter>Havok</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Havok\HavokUtils.cpp">
+      <Filter>Havok</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\Math.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils\IOUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Commands.hpp" />
+    <ClInclude Include="Source\FatalException.hpp" />
+    <ClInclude Include="Source\Conversion\FbxToHavok.hpp">
+      <Filter>Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Conversion\HavokToFbx.hpp">
+      <Filter>Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FBX\FbxSystem.hpp">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FBX\FbxUtils.hpp">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Havok\HavokSystem.hpp">
+      <Filter>Havok</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Havok\HavokUtils.hpp">
+      <Filter>Havok</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Havok\HavokHeaders.hpp">
+      <Filter>Havok</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\IOUtils.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\Math.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils\Singleton.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Conversion">
+      <UniqueIdentifier>{e81345e5-04b7-4358-8a4b-265937ee3794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FBX">
+      <UniqueIdentifier>{a5868f6c-04f2-43bd-a479-3d7b815b62bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Havok">
+      <UniqueIdentifier>{3a7072e9-b198-499f-b8f8-0eddb53c9691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{67e71746-16e4-44d2-b742-bc1ae17c5ff3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
