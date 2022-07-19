@@ -4,25 +4,24 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using XAT.Common.FFXIV.Files;
 using XAT.Common.Havok;
-using XAT.Logic;
+using XAT.Common.Interop;
 using XAT.Utils;
 using XAT.Utils.Dialog;
 using Serilog;
 using System.IO;
 using System.Collections.ObjectModel;
 using XAT.Views;
-using System.Linq;
 
 namespace XAT.ViewModels;
 
 [AddINotifyPropertyChangedInterface]
 class AnimationEditorViewModel
 {
-    public string FileTypeFilters => AnimationFileTypeExtensions.GetFileFormatFilters();
-    public AnimationFileType? SelectedExportType { get; set; }
+    public string FileTypeFilters => ContainerFIleTypeExtensions.GetFileFormatFilters();
+    public ContainerFileType? SelectedExportType { get; set; }
     public string ExportPath { get; set; } = string.Empty;
 
-    public AnimationFileType? SelectedImportType { get; set; }
+    public ContainerFileType? SelectedImportType { get; set; }
     public string ImportPath { get; set; } = string.Empty;
     public ObservableCollection<string> ImportTracks { get; private set; } = new();
     public string? SelectedImportTrack { get; set; }
@@ -112,7 +111,7 @@ class AnimationEditorViewModel
             {
                 switch (this.SelectedExportType)
                 {
-                    case AnimationFileType.FBX:
+                    case ContainerFileType.FBX:
                         {
                             Log.Information("Exporting FBX...");
                             var result = await AnimationInterop.ExportFBX(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ExportPath);
@@ -122,12 +121,12 @@ class AnimationEditorViewModel
                         }
                         break;
 
-                    case AnimationFileType.HavokTagFile:
-                    case AnimationFileType.HavokPackFile:
-                    case AnimationFileType.HavokXMLFile:
+                    case ContainerFileType.HavokTagFile:
+                    case ContainerFileType.HavokPackFile:
+                    case ContainerFileType.HavokXMLFile:
                         {
                             Log.Information("Exporting Havok file...");
-                            await AnimationInterop.ExportHavok((AnimationFileType)this.SelectedExportType, this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.HavokBundleSkeleton, this.ExportPath);
+                            await AnimationInterop.ExportHavok((ContainerFileType)this.SelectedExportType, this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.HavokBundleSkeleton, this.ExportPath);
                             string resultText = $"Exported havok file from {this.SelectedAnimation.Name}.";
                             Log.Information(resultText);
                             DialogUtils.ShowSnackbar(resultText);
@@ -158,7 +157,7 @@ class AnimationEditorViewModel
 
                 switch (this.SelectedImportType)
                 {
-                    case AnimationFileType.FBX:
+                    case ContainerFileType.FBX:
                         {
                             Log.Information("Importing FBX...");
                             var result = await AnimationInterop.ImportFBX(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ImportPath, (int)this.SelectedImportTrackIndex, new(this.ExcludedBones));
@@ -168,9 +167,9 @@ class AnimationEditorViewModel
                         }
                         break;
 
-                    case AnimationFileType.HavokTagFile:
-                    case AnimationFileType.HavokPackFile:
-                    case AnimationFileType.HavokXMLFile:
+                    case ContainerFileType.HavokTagFile:
+                    case ContainerFileType.HavokPackFile:
+                    case ContainerFileType.HavokXMLFile:
                         {
                             Log.Information("Importing Havok animation...");
                             await AnimationInterop.ImportHavok(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ImportPath, (int)this.SelectedImportTrackIndex);
@@ -280,12 +279,12 @@ class AnimationEditorViewModel
 
     public void OnExportPathChanged()
     {
-        this.SelectedExportType = AnimationFileTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ExportPath));
+        this.SelectedExportType = ContainerFIleTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ExportPath));
     }
 
     public async void OnImportPathChanged()
     {
-        this.SelectedImportType = AnimationFileTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ImportPath));
+        this.SelectedImportType = ContainerFIleTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ImportPath));
 
         this.ExcludedBones.Clear();
 
@@ -301,15 +300,15 @@ class AnimationEditorViewModel
         {
             switch (this.SelectedImportType)
             {
-                case AnimationFileType.FBX:
+                case ContainerFileType.FBX:
                     {
                         this.ImportTracks = new(await RawHavokInterop.ListFbxStacks(this.ImportPath!));
                     }
                     break;
 
-                case AnimationFileType.HavokTagFile:
-                case AnimationFileType.HavokPackFile:
-                case AnimationFileType.HavokXMLFile:
+                case ContainerFileType.HavokTagFile:
+                case ContainerFileType.HavokPackFile:
+                case ContainerFileType.HavokXMLFile:
                     {
                         var stats = await RawHavokInterop.GetStats(this.ImportPath!);
                         this.ImportTracks = new();

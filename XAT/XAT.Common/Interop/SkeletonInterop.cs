@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using XAT.Common.FFXIV.Files;
+﻿using XAT.Common.FFXIV.Files;
 using XAT.Common.Havok;
 
-namespace XAT.Logic;
+namespace XAT.Common.Interop;
 
 public static class SkeletonInterop
 {
@@ -23,7 +19,7 @@ public static class SkeletonInterop
         return result;
     }
 
-    public static async Task ExportHavok(Sklb sklb, AnimationFileType exportType, string outputPath)
+    public static async Task ExportHavok(Sklb sklb, ContainerFileType exportType, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -32,15 +28,15 @@ public static class SkeletonInterop
         string extension = Path.GetExtension(outputPath);
         switch (exportType)
         {
-            case AnimationFileType.HavokTagFile:
+            case ContainerFileType.HavokTagFile:
                 await RawHavokInterop.ToTagFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokPackFile:
+            case ContainerFileType.HavokPackFile:
                 await RawHavokInterop.ToPackFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokXMLFile:
+            case ContainerFileType.HavokXMLFile:
                 await RawHavokInterop.ToXMLFile(targetPath, targetPath);
                 break;
             default:
@@ -70,7 +66,7 @@ public static class SkeletonInterop
         return fromResult;
     }
 
-    public static async Task ImportHavok(Sklb sklb, AnimationFileType exportType, string sourceFile)
+    public static async Task ImportHavok(Sklb sklb, ContainerFileType exportType, string sourceFile)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -79,15 +75,15 @@ public static class SkeletonInterop
         string extension = Path.GetExtension(sourceFile);
         switch (exportType)
         {
-            case AnimationFileType.HavokTagFile:
+            case ContainerFileType.HavokTagFile:
                 await RawHavokInterop.ToTagFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokPackFile:
+            case ContainerFileType.HavokPackFile:
                 await RawHavokInterop.ToPackFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokXMLFile:
+            case ContainerFileType.HavokXMLFile:
                 await RawHavokInterop.ToXMLFile(targetPath, targetPath);
                 break;
             default:

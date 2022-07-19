@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using XAT.Common.FFXIV.Files;
+﻿using XAT.Common.FFXIV.Files;
 using XAT.Common.Havok;
 
-namespace XAT.Logic;
+namespace XAT.Common.Interop;
 
 public static class AnimationInterop
 {
@@ -23,7 +19,7 @@ public static class AnimationInterop
         return result;
     }
 
-    public static async Task ExportHavok(AnimationFileType exportType, Pap pap, PapAnimInfo anim, Sklb sklb, bool bundleSkeleton, string outputPath)
+    public static async Task ExportHavok(ContainerFileType exportType, Pap pap, PapAnimInfo anim, Sklb sklb, bool bundleSkeleton, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -32,15 +28,15 @@ public static class AnimationInterop
         string extension = Path.GetExtension(outputPath);
         switch(exportType)
         {
-            case AnimationFileType.HavokTagFile:
+            case ContainerFileType.HavokTagFile:
                 await RawHavokInterop.ToTagFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokPackFile:
+            case ContainerFileType.HavokPackFile:
                 await RawHavokInterop.ToPackFile(targetPath, targetPath);
                 break;
 
-            case AnimationFileType.HavokXMLFile:
+            case ContainerFileType.HavokXMLFile:
                 await RawHavokInterop.ToXMLFile(targetPath, targetPath);
                 break;
             default:

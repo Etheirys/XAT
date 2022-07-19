@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Windows.Input;
 using XAT.Common.FFXIV.Files;
-using XAT.Logic;
+using XAT.Common.Interop;
 using XAT.Utils;
 using XAT.Utils.Dialog;
 
@@ -14,11 +14,11 @@ namespace XAT.ViewModels;
 
 public class SkeletonEditorViewModel
 {
-    public string FileTypeFilters => AnimationFileTypeExtensions.GetFileFormatFilters();
-    public AnimationFileType? SelectedExportType { get; set; }
+    public string FileTypeFilters => ContainerFIleTypeExtensions.GetFileFormatFilters();
+    public ContainerFileType? SelectedExportType { get; set; }
     public string ExportPath { get; set; } = string.Empty;
 
-    public AnimationFileType? SelectedImportType { get; set; }
+    public ContainerFileType? SelectedImportType { get; set; }
     public string ImportPath { get; set; } = string.Empty;
 
     public string SklbPath { get; set; } = string.Empty;
@@ -89,7 +89,7 @@ public class SkeletonEditorViewModel
             {
                 switch (this.SelectedExportType)
                 {
-                    case AnimationFileType.FBX:
+                    case ContainerFileType.FBX:
                         {
                             Log.Information("Exporting FBX...");
                             var result = await SkeletonInterop.ExportFBX(this.LoadedSklb, this.ExportPath);
@@ -99,12 +99,12 @@ public class SkeletonEditorViewModel
                         }
                         break;
 
-                    case AnimationFileType.HavokTagFile:
-                    case AnimationFileType.HavokPackFile:
-                    case AnimationFileType.HavokXMLFile:
+                    case ContainerFileType.HavokTagFile:
+                    case ContainerFileType.HavokPackFile:
+                    case ContainerFileType.HavokXMLFile:
                         {
                             Log.Information("Exporting Havok file...");
-                            await SkeletonInterop.ExportHavok(this.LoadedSklb, (AnimationFileType)this.SelectedExportType, this.ExportPath);
+                            await SkeletonInterop.ExportHavok(this.LoadedSklb, (ContainerFileType)this.SelectedExportType, this.ExportPath);
                             string resultText = $"Exported havok file.";
                             Log.Information(resultText);
                             DialogUtils.ShowSnackbar(resultText);
@@ -133,7 +133,7 @@ public class SkeletonEditorViewModel
             {
                 switch (this.SelectedImportType)
                 {
-                    case AnimationFileType.FBX:
+                    case ContainerFileType.FBX:
                         {
                             Log.Information("Importing FBX...");
                             var result = await SkeletonInterop.ImportFBX(this.LoadedSklb, this.ImportPath, this.PreserveImportCompatibility);
@@ -143,12 +143,12 @@ public class SkeletonEditorViewModel
                         }
                         break;
 
-                    case AnimationFileType.HavokTagFile:
-                    case AnimationFileType.HavokPackFile:
-                    case AnimationFileType.HavokXMLFile:
+                    case ContainerFileType.HavokTagFile:
+                    case ContainerFileType.HavokPackFile:
+                    case ContainerFileType.HavokXMLFile:
                         {
                             Log.Information("Importing Havok file...");
-                            await SkeletonInterop.ImportHavok(this.LoadedSklb, (AnimationFileType)this.SelectedImportType, this.ImportPath);
+                            await SkeletonInterop.ImportHavok(this.LoadedSklb, (ContainerFileType)this.SelectedImportType, this.ImportPath);
                             string resultText = $"Imported havok file.";
                             Log.Information(resultText);
                             DialogUtils.ShowSnackbar(resultText);
@@ -170,11 +170,11 @@ public class SkeletonEditorViewModel
     }
     public void OnImportPathChanged()
     {
-        this.SelectedImportType = AnimationFileTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ImportPath));
+        this.SelectedImportType = ContainerFIleTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ImportPath));
     }
 
     public void OnExportPathChanged()
     {
-        this.SelectedExportType = AnimationFileTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ExportPath));
+        this.SelectedExportType = ContainerFIleTypeExtensions.GetTypeFromExtension(Path.GetExtension(this.ExportPath));
     }
 }

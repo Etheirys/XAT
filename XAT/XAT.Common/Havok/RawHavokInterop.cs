@@ -1,7 +1,6 @@
 ﻿using Serilog;
 using System.Diagnostics;
 using System.Text;
-using System.Linq;
 
 namespace XAT.Common.Havok;
 

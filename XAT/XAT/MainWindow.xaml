@@ -12,7 +12,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="XAT - XIV Animation Toolkit" Height="615" Width="900">
+        Title="XAT - The XIV Animation Toolkit" Height="615" Width="900">
     <Grid Name="ContentArea">
         <TabControl>
             <TabControl.ContentTemplate>
@@ -31,12 +31,8 @@
                 <views:SkeletonTab/>
             </TabItem>
             
-            <TabItem Header="Advanced">
-
-            </TabItem>
-            
-            <TabItem Header="About">
-
+            <TabItem Header="Help">
+                <views:HelpTab />
             </TabItem>
         </TabControl>
 
