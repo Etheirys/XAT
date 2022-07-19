@@ -14,6 +14,7 @@ Human readable output is piped to stdout. Machine readable output is piped to st
 The tool never overrwrites any files used as source unless they are specified as the output.
 
 ## API
+```
 Get stats about the container - getStats(string container) -> (int skeletonCount / int animCount / int bindingCount)
 Create a blank animation container - createContainer(string outputPath) -> null
 Add animation and associated binding to container - addAnimation(string targetContainer, string sourceContainer, int sourceAnimIdx, string outputContainer) -> (int newAnimIdx / int newBindingIdx)
@@ -33,3 +34,4 @@ Convert FBX to havok animation - fromFbxAnimation(string fbxPath, int animStackI
 Get list of FBX bones in index order - listFbxBones(string container) -> (list<string />)
 Quanitized compression - compress(const quantized, string sourceContainerPath, int sourceAnimIdx, int sourceSkeletonIdx, float floatingTolerance, float translationTolerance, float rotationTolerance, float scaleTolerance, string outputContainerPath) -> null
 Predictive compression - compress(const predictive, string sourceContainerPath, int sourceAnimIdx, int sourceSkeletonIdx, float staticFloatingTolerance, float staticTranslationTolerance, float staticRotationTolerance, float staticScaleTolerance, float dynamicFloatingTolerance, float dynamicTranslationTolerance, float dynamicRotationTolerance, float dynamicScaleTolerance, string outputContainerPath) -> null
+```
