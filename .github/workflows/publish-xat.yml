@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Generated version
+    - name: Generate version
       uses: josStorer/get-current-time@v2
       id: version-date
       with:
