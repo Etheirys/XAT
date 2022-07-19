@@ -58,11 +58,12 @@ int FbxToHavok::ConvertSkeleton(FbxScene* sourceScene, hkaSkeleton* targetSkelet
 
 		// Find valid parent
 		int parentIndex = -1;
-		if (boneName != "n_root") // We stop at n_root
+		FbxNode* parent = node->GetParent();
+		if (parent)
 		{
-			FbxNode* parent = node->GetParent();
-			if (parent)
+			if (sourceScene->GetRootNode() != parent) // Skip root
 			{
+
 				const std::string& parentBoneName = parent->GetName();
 				auto parentIt = std::find(convertOrder.begin(), convertOrder.end(), parentBoneName);
 
@@ -99,7 +100,7 @@ int FbxToHavok::ConvertAnimation(FbxScene* sourceScene, FbxAnimStack* sourceAnim
 	int startFrame = (int)startTime.GetFrameCount(timeMode);
 	int stopFrame = (int)stopTime.GetFrameCount(timeMode);
 	int frameCount = stopFrame - startFrame + 1;
-	float duration = (float) stopTime.GetSecondDouble();
+	float duration = (float)stopTime.GetSecondDouble();
 
 	std::cout << "Found " << numSourceTracks << " source bones and " << numTargetTracks << " target bones across " << frameCount << " frames (" << duration << "s)." << std::endl;
 
@@ -140,7 +141,7 @@ int FbxToHavok::ConvertAnimation(FbxScene* sourceScene, FbxAnimStack* sourceAnim
 	targetBinding->m_animation = targetAnimation;
 	targetBinding->m_originalSkeletonName = sourceSkeleton->m_name;
 	targetBinding->m_transformTrackToBoneIndices.setSize(validTrackCount);
-	
+
 	// Frame conversion
 	std::cout << "Converting " << frameCount << " frames..." << std::endl;
 	FbxAnimEvaluator* animEvaluator = sourceScene->GetAnimationEvaluator();
