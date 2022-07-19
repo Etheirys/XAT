@@ -9,8 +9,8 @@ XAT aims to combine and improve on the previous disparate efforts for XIV animat
 * [.NET 6.x Desktop Runtime x64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.6-windows-x64-installer)
 * [Visual C++ Redistributable for Visual Studio 2012 x86](https://www.microsoft.com/en-ca/download/details.aspx?id=30679)
 
-## Documentation
-Coming soon...
+## Help
+The project is still a very early Alpha and documentation is still being worked on.  Join us on [Discord](https://discord.gg/KvGJCCnG8t).
 
 ## Contributing
 XAT is entirely open source and contributions are welcome.
