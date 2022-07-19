@@ -42,7 +42,6 @@ FbxScene* FbxSystem::CreateScene(const char* name)
 
     scene->GetGlobalSettings().SetTimeMode(FbxTime::eFrames30);
     scene->GetGlobalSettings().SetCustomFrameRate(30.0);
-    scene->GetGlobalSettings().SetSystemUnit(FbxSystemUnit::m);
 
     return scene;
 }
