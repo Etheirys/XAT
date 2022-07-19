@@ -12,6 +12,8 @@ int FbxToHavok::ConvertSkeleton(FbxScene* sourceScene, hkaSkeleton* targetSkelet
 {
 	std::cout << "Converting skeleton..." << std::endl;
 
+	targetSkeleton->m_name = "skeleton";
+
 	// Get just bones
 	FbxBoneMap boneMap = FbxBoneMap::Create(sourceScene);
 	int validCount = boneMap.Size();
