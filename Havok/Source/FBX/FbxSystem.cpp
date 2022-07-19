@@ -71,6 +71,8 @@ void FbxSystem::LoadScene(FbxScene* scene, const char* fileName)
         throw FatalException("FBX Import Error: " + errorStr);
     }
 
+    FbxSystemUnit::m.ConvertScene(scene);
+
     importer->Destroy();
 }
 
@@ -89,6 +91,8 @@ void FbxSystem::SaveScene(FbxScene* scene, const char* fileName)
         std::string errorStr(error);
         throw FatalException("Export Error: " + errorStr);
     }
+
+    scene->GetGlobalSettings().SetSystemUnit(FbxSystemUnit::m);
 
     bool exportStatus = exporter->Export(scene);
 
