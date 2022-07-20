@@ -29,19 +29,25 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <Button Command="{Binding ExcludeBone}">
-                <materialDesign:PackIcon Kind="Upload"/>
+                <materialDesign:PackIcon Kind="ArrowUp" ToolTip="Add Exclusion"/>
             </Button>
 
-            <Separator Opacity="0" Width="20" />
+            <Separator Opacity="0" Width="10" />
 
             <Button Command="{Binding IncludeBone}">
-                <materialDesign:PackIcon Kind="Download" />
+                <materialDesign:PackIcon Kind="ArrowDown" ToolTip="Remove Exclusion" />
             </Button>
 
-            <Separator Opacity="0" Width="20" />
+            <Separator Opacity="0" Width="40" />
 
             <Button Command="{Binding LoadExclusions}">
-                <materialDesign:PackIcon Kind="FileUpload" />
+                <materialDesign:PackIcon Kind="FileUpload" ToolTip="Load Exclusion List"/>
+            </Button>
+
+            <Separator Opacity="0" Width="10" />
+
+            <Button Command="{Binding SaveExclusions}">
+                <materialDesign:PackIcon Kind="FileDownload" ToolTip="Save Exclusion List"/>
             </Button>
         </StackPanel>
 

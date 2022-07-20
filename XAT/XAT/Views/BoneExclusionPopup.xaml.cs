@@ -3,6 +3,7 @@ using PropertyChanged;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 using XAT.Utils;
@@ -51,7 +52,7 @@ public partial class BoneExclusionPopup : UserControl
     public ICommand LoadExclusions => new Command(async (_) =>
     {
         OpenFileDialog fileDialog = new();
-        fileDialog.Filter = "Bone Exclusion File (*.txt)|*.txt";
+        fileDialog.Filter = "XAT Bone Exclusion File (*.xbe)|*.xbe";
 
         if(fileDialog.ShowDialog() == true)
         {
@@ -59,15 +60,37 @@ public partial class BoneExclusionPopup : UserControl
             foreach(var line in lines)
             {
                 var boneName = line.Trim();
-                if(this.AllBones.Contains(boneName) && !this.ExcludedBones.Contains(boneName))
+                if(!string.IsNullOrEmpty(boneName))
                 {
-                    this.ExcludedBones.Add(boneName);
+                    if (this.AllBones.Contains(boneName) && !this.ExcludedBones.Contains(boneName))
+                    {
+                        this.ExcludedBones.Add(boneName);
+                    }
                 }
             }
 
             this.UpdateBoneLists();
         }
 
+    });
+
+    public ICommand SaveExclusions => new Command(async (_) =>
+    {
+        SaveFileDialog fileDialog = new();
+        fileDialog.Filter = "XAT Bone Exclusion File (*.xbe)|*.xbe";
+
+        if (fileDialog.ShowDialog() == true)
+        {
+            StringBuilder sb = new();
+            foreach (var boneName in ExcludedBones)
+            {
+                sb.AppendLine(boneName);
+            }
+
+            await File.WriteAllTextAsync(fileDialog.FileName, sb.ToString());
+
+            this.UpdateBoneLists();
+        }
     });
 
     public ICommand ClosePopup => new Command((_) =>
