@@ -35,3 +35,8 @@ Get list of FBX bones in index order - listFbxBones(string container) -> (list<s
 Quanitized compression - compress(const quantized, string sourceContainerPath, int sourceAnimIdx, int sourceSkeletonIdx, float floatingTolerance, float translationTolerance, float rotationTolerance, float scaleTolerance, string outputContainerPath) -> null
 Predictive compression - compress(const predictive, string sourceContainerPath, int sourceAnimIdx, int sourceSkeletonIdx, float staticFloatingTolerance, float staticTranslationTolerance, float staticRotationTolerance, float staticScaleTolerance, float dynamicFloatingTolerance, float dynamicTranslationTolerance, float dynamicRotationTolerance, float dynamicScaleTolerance, string outputContainerPath) -> null
 ```
+
+## Building
+* Visual C++ Platform Toolset v110 (Visual Studio 2012)
+* Havok 2014 SDK for VS2012 (set as HAVOK_SDK_ROOT environment variable)
+* [FBX SDK 2014.2.1](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2014-2-1) for VS2012 (set as FBX_SDK_ROOT environment variable)
