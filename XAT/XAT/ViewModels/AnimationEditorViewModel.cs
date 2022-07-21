@@ -222,8 +222,11 @@ class AnimationEditorViewModel
 
         var popup = new BoneExclusionPopup()
         {
-            AllBones = new(boneList),
-            ExcludedBones = this.ExcludedBones
+            DataContext = new BoneExclusionViewModel()
+            {
+                 AllBones = new(boneList),
+                 ExcludedBones = this.ExcludedBones
+            }
         };
 
         await DialogUtils.ShowRaw(popup);
