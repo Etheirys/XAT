@@ -1,23 +1,19 @@
 ﻿using Serilog;
-using System;
 using System.Windows;
+using XAT.Services;
 
 namespace XAT;
 
 public partial class App : Application
 {
-    private void Application_Startup(object sender, StartupEventArgs e)
+    private async void Application_Startup(object sender, StartupEventArgs e)
     {
-        var log = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.Debug()
-            .WriteTo.File("Logs/xat.txt", rollingInterval: RollingInterval.Day)
-            .CreateLogger();
+        ServiceManager.Create(this);
 
-        Log.Logger = log;
+        await ServiceManager.Instance.InitializeServices();
 
-        Log.Information($"XAT Version: {System.Reflection.Assembly.GetEntryAssembly()?.GetName()?.Version}");
-        Log.Information($"Dotnet Runtime: {Environment.Version}");
+        await ServiceManager.Instance.StartServices();
+
     }
 
     private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

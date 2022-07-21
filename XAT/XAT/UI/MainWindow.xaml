@@ -1,0 +1,42 @@
+﻿<Window x:Class="XAT.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XAT"
+        xmlns:views="clr-namespace:XAT.UI.Views"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Title="XAT - The XIV Animation Toolkit" Height="615" Width="900">
+    <Grid Name="ContentArea">
+        <TabControl>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <ContentPresenter Content="{Binding}"/>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+
+            <TabItem Header="Animation">
+                <views:AnimationTab />
+            </TabItem>
+            
+            <TabItem Header="Skeleton">
+                <views:SkeletonTab/>
+            </TabItem>
+            
+            <TabItem Header="Help">
+                <views:HelpTab />
+            </TabItem>
+        </TabControl>
+
+        <materialDesign:DialogHost Identifier="PopupOverlay" Panel.ZIndex="100"/>
+        <materialDesign:Snackbar x:Name="MainSnackbar" MessageQueue="{materialDesign:MessageQueue}" Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>

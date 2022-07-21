@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:XAT"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:converters="clr-namespace:XAT.Utils.WPF.Converters"
-             StartupUri="MainWindow.xaml" Startup="Application_Startup" DispatcherUnhandledException="Application_DispatcherUnhandledException">
+             xmlns:converters="clr-namespace:XAT.UI.Utils.Converters"
+             Startup="Application_Startup" DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
