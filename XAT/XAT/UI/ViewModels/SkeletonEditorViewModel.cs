@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows.Input;
 using XAT.Common.FFXIV.Files;
 using XAT.Common.Interop;
-using XAT.UI.Services;
 using XAT.UI.Utils;
 
 namespace XAT.UI.ViewModels;
@@ -38,7 +37,7 @@ public class SkeletonEditorViewModel
 
             if (string.IsNullOrEmpty(this.SklbPath))
             {
-                await DialogService.Instance.ShowErrorPopup("Must specify a sklb path.");
+                await DialogUtils.ShowErrorPopup("Must specify a sklb path.");
                 return;
             }
 
@@ -52,11 +51,11 @@ public class SkeletonEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error importing: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error importing: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error importing: {e.Message}");
                 return;
             }
 
-            DialogService.Instance.ShowSnackbar("Successfully loaded sklb.");
+            DialogUtils.ShowSnackbar("Successfully loaded sklb.");
             Log.Information("Successfully loaded sklb.");
         }
     });
@@ -72,7 +71,7 @@ public class SkeletonEditorViewModel
             await File.WriteAllBytesAsync(this.OutputPath, this.LoadedSklb.ToBytes());
             string resultText = $"Sklb saved.";
             Log.Information(resultText);
-            DialogService.Instance.ShowSnackbar(resultText);
+            DialogUtils.ShowSnackbar(resultText);
         }
     });
 
@@ -95,7 +94,7 @@ public class SkeletonEditorViewModel
                             var result = await SkeletonInterop.ExportFBX(this.LoadedSklb, this.ExportPath);
                             string resultText = $"Generated FBX from {result} bones.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
 
@@ -107,7 +106,7 @@ public class SkeletonEditorViewModel
                             await SkeletonInterop.ExportHavok(this.LoadedSklb, (ContainerFileType)this.SelectedExportType, this.ExportPath);
                             string resultText = $"Exported havok file.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
                 }
@@ -115,7 +114,7 @@ public class SkeletonEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error exporting: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error exporting: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error exporting: {e.Message}");
             }
         }
     });
@@ -139,7 +138,7 @@ public class SkeletonEditorViewModel
                             var result = await SkeletonInterop.ImportFBX(this.LoadedSklb, this.ImportPath, this.PreserveImportCompatibility);
                             string resultText = $"Generated havok data from {result} bones.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
 
@@ -151,7 +150,7 @@ public class SkeletonEditorViewModel
                             await SkeletonInterop.ImportHavok(this.LoadedSklb, (ContainerFileType)this.SelectedImportType, this.ImportPath);
                             string resultText = $"Imported havok file.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
                 }
@@ -159,7 +158,7 @@ public class SkeletonEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error importing: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error importing: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error importing: {e.Message}");
             }
         }
     });

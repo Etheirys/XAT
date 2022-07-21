@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:XAT.UI.Views"
+             xmlns:utils="clr-namespace:XAT.UI.Utils"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="600"
@@ -12,7 +13,7 @@
     <GroupBox Name="ContentArea" Header="Error">
         <StackPanel>
             <TextBlock Margin="0 6 0 0" TextWrapping="Wrap" Text="{Binding Message}"/>
-            <Button IsDefault="True" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Margin="16 16 16 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+            <Button IsDefault="True" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Margin="16 16 16 0" Command="{x:Static utils:DialogUtils.PopCommand}">
                 OK
             </Button>
         </StackPanel>

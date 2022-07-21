@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows.Input;
-using XAT.UI.Services;
 using XAT.UI.Utils;
 
 namespace XAT.UI.ViewModels;
@@ -90,11 +89,6 @@ public class BoneExclusionViewModel
 
             this.UpdateBoneLists();
         }
-    });
-
-    public ICommand ClosePopup => new Command((_) =>
-    {
-        DialogService.Instance.CloseRaw();
     });
 
     public void OnExcludedBonesChanged()

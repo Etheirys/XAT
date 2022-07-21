@@ -11,8 +11,6 @@ public class FileService : ServiceBase<FileService>
     private static readonly string LogsRawPath = Path.Combine(AppDataRawPath, "Logs", "xat-log.txt");
     private static readonly string SettingsRawPath = Path.Combine(AppDataRawPath, "Settings.json");
 
-    private static string? appDataPath;
-
     public FileService()
     {
         AppDataPath = ParseToFilePath(AppDataRawPath);

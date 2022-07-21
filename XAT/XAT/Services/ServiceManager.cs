@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using XAT.Core.Services;
 using XAT.UI.Services;
+using XAT.UI.Utils;
 
 namespace XAT.Services;
 
@@ -17,7 +18,6 @@ public class ServiceManager
 		await Add<VersionService>();
 
 		// UI
-		await Add<DialogService>();
 		await Add<MainWindowService>();
 	}
 

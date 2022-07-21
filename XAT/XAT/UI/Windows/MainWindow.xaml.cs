@@ -1,14 +1,14 @@
 ﻿using System.Windows;
-using XAT.UI.Services;
+using XAT.UI.Utils;
 
-namespace XAT.UI;
+namespace XAT.UI.Windows;
 
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
-        DialogService.Instance.MainSnackbar = this.MainSnackbar;
+        DialogUtils.MainSnackbar = this.MainSnackbar;
     }
 
 }

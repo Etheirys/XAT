@@ -10,7 +10,6 @@ using System.IO;
 using System.Collections.ObjectModel;
 using XAT.UI.Views;
 using XAT.UI.Utils;
-using XAT.UI.Services;
 
 namespace XAT.UI.ViewModels;
 
@@ -68,13 +67,13 @@ class AnimationEditorViewModel
 
             if (string.IsNullOrEmpty(this.PapPath))
             {
-                await DialogService.Instance.ShowErrorPopup("Must specify a pap path.");
+                await DialogUtils.ShowErrorPopup("Must specify a pap path.");
                 return;
             }
 
             if (string.IsNullOrEmpty(this.SklbPath))
             {
-                await DialogService.Instance.ShowErrorPopup("Must specify a sklb path.");
+                await DialogUtils.ShowErrorPopup("Must specify a sklb path.");
                 return;
             }
 
@@ -89,11 +88,11 @@ class AnimationEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error importing: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error importing: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error importing: {e.Message}");
                 return;
             }
 
-            DialogService.Instance.ShowSnackbar("Successfully loaded source pap and sklb.");
+            DialogUtils.ShowSnackbar("Successfully loaded source pap and sklb.");
             Log.Information("Successfully loaded source pap and sklb.");
         }
     });
@@ -117,7 +116,7 @@ class AnimationEditorViewModel
                             var result = await AnimationInterop.ExportFBX(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ExportPath);
                             string resultText = $"Generated FBX from {this.SelectedAnimation.Name} with {result.framesConverted} frames across {result.bonesConverted} bones.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
 
@@ -129,7 +128,7 @@ class AnimationEditorViewModel
                             await AnimationInterop.ExportHavok((ContainerFileType)this.SelectedExportType, this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.HavokBundleSkeleton, this.ExportPath);
                             string resultText = $"Exported havok file from {this.SelectedAnimation.Name}.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
                 }
@@ -137,7 +136,7 @@ class AnimationEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error exporting: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error exporting: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error exporting: {e.Message}");
             }
 
 
@@ -163,7 +162,7 @@ class AnimationEditorViewModel
                             var result = await AnimationInterop.ImportFBX(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ImportPath, (int)this.SelectedImportTrackIndex, new(this.ExcludedBones));
                             string resultText = $"Imported {result.framesConverted} frames across {result.bonesBound} bones from FBX to {this.SelectedAnimation.Name}.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
 
@@ -175,7 +174,7 @@ class AnimationEditorViewModel
                             await AnimationInterop.ImportHavok(this.LoadedPap, this.SelectedAnimation, this.LoadedSklb, this.ImportPath, (int)this.SelectedImportTrackIndex);
                             string resultText = $"Imported havok file.";
                             Log.Information(resultText);
-                            DialogService.Instance.ShowSnackbar(resultText);
+                            DialogUtils.ShowSnackbar(resultText);
                         }
                         break;
                 }
@@ -183,7 +182,7 @@ class AnimationEditorViewModel
             catch (Exception e)
             {
                 Log.Error($"Error exporting: {e}", e);
-                await DialogService.Instance.ShowErrorPopup($"Error exporting: {e.Message}");
+                await DialogUtils.ShowErrorPopup($"Error exporting: {e.Message}");
             }
         }
     });
@@ -199,7 +198,7 @@ class AnimationEditorViewModel
             await File.WriteAllBytesAsync(this.OutputPath, this.LoadedPap.ToBytes());
             string resultText = $"Pap saved.";
             Log.Information(resultText);
-            DialogService.Instance.ShowSnackbar(resultText);
+            DialogUtils.ShowSnackbar(resultText);
         }
     });
 
@@ -229,7 +228,7 @@ class AnimationEditorViewModel
             }
         };
 
-        await DialogService.Instance.ShowRaw(popup);
+        await DialogUtils.Show(popup);
     });
 
     public ICommand Compress => new Command(async (_) =>
@@ -259,12 +258,12 @@ class AnimationEditorViewModel
                 }
 
                 int havokSizeNow = this.LoadedPap.HavokData.Length;
-                DialogService.Instance.ShowSnackbar($"Saved {havokSizeBefore - havokSizeNow} bytes during compression.");
+                DialogUtils.ShowSnackbar($"Saved {havokSizeBefore - havokSizeNow} bytes during compression.");
 
             }
             catch (Exception e)
             {
-                await DialogService.Instance.ShowErrorPopup(e.Message);
+                await DialogUtils.ShowErrorPopup(e.Message);
             }
         }
     });
@@ -324,7 +323,7 @@ class AnimationEditorViewModel
 
             var resultText = $"Found {this.ImportTracks.Count} animation track(s).";
             Log.Information(resultText);
-            DialogService.Instance.ShowSnackbar(resultText);
+            DialogUtils.ShowSnackbar(resultText);
         }
     }
 
