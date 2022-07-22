@@ -1,4 +1,5 @@
 ﻿using PropertyChanged;
+using Serilog;
 using System.Text;
 
 namespace XAT.Common.FFXIV.Files;
@@ -20,11 +21,28 @@ public class Sklb
 
         // Read header
         int headerVersion = reader.ReadInt32();
-        bool headerType2 = headerVersion == 0x31333030;
+        bool oldHeader;
+
+        switch(headerVersion)
+        {
+            case 0x31323030:
+                oldHeader = true;
+                break;
+
+            case 0x31333030:
+            case 0x31333031:
+                oldHeader = false;
+                break;
+
+            default:
+                Log.Warning($"Unknown sklb header: 0x{headerVersion.ToString("X")} - assuming new for now.");
+                oldHeader = false;
+                break;
+        }
 
         // Havok offset
         int havokOffset;
-        if (!headerType2)
+        if (oldHeader)
         {
             reader.BaseStream.Seek(10, SeekOrigin.Begin);
             havokOffset = reader.ReadInt16();
