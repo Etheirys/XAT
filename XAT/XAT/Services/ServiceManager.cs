@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using XAT.Core.Services;
 using XAT.UI.Services;
-using XAT.UI.Utils;
 
 namespace XAT.Services;
 
@@ -13,8 +12,10 @@ public class ServiceManager
 	public async Task InitializeServices()
 	{
 		// Core
+		await Add<SerializerService>();
 		await Add<FileService>();
 		await Add<LogService>();
+		await Add<SettingsService>();
 		await Add<VersionService>();
 
 		// UI
