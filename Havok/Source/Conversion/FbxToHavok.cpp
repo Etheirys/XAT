@@ -92,6 +92,8 @@ int FbxToHavok::ConvertAnimation(FbxScene* sourceScene, FbxAnimStack* sourceAnim
 {
 	std::cout << "Converting animation..." << std::endl;
 
+	sourceScene->SetCurrentAnimationStack(sourceAnim);
+
 	FbxBoneMap sourceBoneMap = FbxBoneMap::Create(sourceScene);
 
 	int numTargetTracks = sourceSkeleton->m_bones.getSize();
