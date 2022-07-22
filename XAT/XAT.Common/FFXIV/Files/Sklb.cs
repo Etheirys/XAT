@@ -20,22 +20,24 @@ public class Sklb
             throw new Exception("Invalid sklb file - magic incorrect");
 
         // Read header
-        int headerVersion = reader.ReadInt32();
+        int header1 = reader.ReadInt16();
+        int header2 = reader.ReadInt16();
         bool oldHeader;
 
-        switch(headerVersion)
+        Log.Debug($"Sklb headers were: Part 1: 0x{header1.ToString("X")}, Part 2: 0x{header2.ToString("X")}");
+
+        switch(header2)
         {
-            case 0x31323030:
+            case 0x3132:
                 oldHeader = true;
                 break;
 
-            case 0x31333030:
-            case 0x31333031:
+            case 0x3133:
                 oldHeader = false;
                 break;
 
             default:
-                Log.Warning($"Unknown sklb header: 0x{headerVersion.ToString("X")} - assuming new for now.");
+                Log.Warning($"Unknown sklb headers: Part 1: 0x{header1.ToString("X")}, Part 2: 0x{header2.ToString("X")} - Assume it's new for now");
                 oldHeader = false;
                 break;
         }
