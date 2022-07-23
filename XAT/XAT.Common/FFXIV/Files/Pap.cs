@@ -10,8 +10,8 @@ public class Pap
 
     public int Skeleton { get; set; }
     public byte[] HavokData { get; set; }
-    public byte[] TimelineData { get; set; }
     public List<PapAnimInfo> AnimInfos { get; private set; } = new();
+    public List<Tmb> Timelines { get; private set; } = new();
 
     public Pap(BinaryReader reader)
     {
@@ -48,7 +48,12 @@ public class Pap
 
         // Timeline Data
         reader.BaseStream.Seek(timelineOffset, SeekOrigin.Begin);
-        this.TimelineData = reader.ReadBytes((int)reader.BaseStream.Length - timelineOffset);
+        for (int i = 0; i < numAnims; i++)
+        {
+            Timelines.Add(new Tmb(reader));
+            var requiredPadding = AlignBoundary(reader.BaseStream.Position, i, numAnims);
+            _ = reader.ReadBytes(requiredPadding);
+        }
     }
 
     public void Serialize(BinaryWriter writer)
@@ -86,7 +91,12 @@ public class Pap
 
         // Timeline Data
         int timelineOffset = (int)writer.BaseStream.Position;
-        writer.Write(this.TimelineData);
+        for (int i = 0; i < Timelines.Count; i++)
+        {
+            Timelines[i].Serialize(writer);
+            var requiredPadding = AlignBoundary(writer.BaseStream.Position, i, Timelines.Count);
+            writer.Write(new byte[requiredPadding]);
+        }
 
         // Fix Offsets
         writer.BaseStream.Seek(offsetsPosition, SeekOrigin.Begin);
@@ -118,5 +128,15 @@ public class Pap
     {
         using var stream = new MemoryStream(data);
         return new Pap(new BinaryReader(stream));
+    }
+
+    private static int AlignBoundary(long position, int idx, int max) // From VFXEditor - looks like timeline needs to be 4 byte aligned
+    {
+        if (max > 1 && idx < max - 1)
+        {
+            var leftOver = position % 4;
+            return (int)(leftOver == 0 ? 0 : 4 - leftOver);
+        }
+        return 0;
     }
 }
