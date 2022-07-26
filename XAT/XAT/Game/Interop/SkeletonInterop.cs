@@ -1,11 +1,14 @@
-﻿using XAT.Common.FFXIV.Files;
-using XAT.Common.Havok;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using XAT.Game.Formats.Sklb;
+using XAT.Game.Havok;
 
-namespace XAT.Common.Interop;
+namespace XAT.Game.Interop;
 
 public static class SkeletonInterop
 {
-    public static async Task<int> ExportFBX(Sklb sklb, string outputPath)
+    public static async Task<int> ExportFBX(SklbFormat sklb, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -19,7 +22,7 @@ public static class SkeletonInterop
         return result;
     }
 
-    public static async Task ExportHavok(Sklb sklb, ContainerFileType exportType, string outputPath)
+    public static async Task ExportHavok(SklbFormat sklb, ContainerFileType exportType, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -47,7 +50,7 @@ public static class SkeletonInterop
         File.Delete(targetPath);
     }
 
-    public static async Task<int> ImportFBX(Sklb sklb, string sourceFbx, bool preserveCompat)
+    public static async Task<int> ImportFBX(SklbFormat sklb, string sourceFbx, bool preserveCompat)
     {
         string originalSkele = Path.GetTempFileName();
         string targetPath = Path.GetTempFileName();
@@ -66,7 +69,7 @@ public static class SkeletonInterop
         return fromResult;
     }
 
-    public static async Task ImportHavok(Sklb sklb, ContainerFileType exportType, string sourceFile)
+    public static async Task ImportHavok(SklbFormat sklb, ContainerFileType exportType, string sourceFile)
     {
         string targetPath = Path.GetTempFileName();
 

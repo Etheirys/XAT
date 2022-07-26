@@ -1,10 +1,11 @@
 ﻿using PropertyChanged;
+using System.IO;
 using System.Text;
 
-namespace XAT.Common.FFXIV.Files;
+namespace XAT.Game.Formats.Pap;
 
 [AddINotifyPropertyChangedInterface]
-public class PapAnimInfo
+public class PapAnimDataFormat
 {
     public string Name { get; set; }
     public short HavokIndex { get; set; }
@@ -12,7 +13,7 @@ public class PapAnimInfo
     public int Unk2 { get; private set; }
 
 
-    public PapAnimInfo(BinaryReader reader)
+    public PapAnimDataFormat(BinaryReader reader)
     {
         // Name
         Name = Encoding.ASCII.GetString(reader.ReadBytes(32));

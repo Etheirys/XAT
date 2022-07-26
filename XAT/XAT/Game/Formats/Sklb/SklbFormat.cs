@@ -1,22 +1,25 @@
 ﻿using PropertyChanged;
 using Serilog;
+using System;
+using System.IO;
 using System.Text;
+using XAT.Game.Formats.Utils;
 
-namespace XAT.Common.FFXIV.Files;
+namespace XAT.Game.Formats.Sklb;
 
 [AddINotifyPropertyChangedInterface]
-public class Sklb
+public class SklbFormat
 {
-    private const string SKLB_MAGIC = "blks";
+    private const string MAGIC = "blks";
 
     public byte[] PreHavokData { get; set; }
     public byte[] HavokData { get; set; }
 
-    public Sklb(BinaryReader reader)
+    public SklbFormat(BinaryReader reader)
     {
         // Magic
-        string magic = Encoding.ASCII.GetString(reader.ReadBytes(4));
-        if (magic != SKLB_MAGIC)
+        string magic = reader.ReadEncodedString(4);
+        if (magic != MAGIC)
             throw new Exception("Invalid sklb file - magic incorrect");
 
         // Read header
@@ -26,7 +29,7 @@ public class Sklb
 
         Log.Debug($"Sklb headers were: Part 1: 0x{header1.ToString("X")}, Part 2: 0x{header2.ToString("X")}");
 
-        switch(header2)
+        switch (header2)
         {
             case 0x3132:
                 oldHeader = true;
@@ -80,15 +83,15 @@ public class Sklb
         this.Serialize(new BinaryWriter(sklbStream));
     }
 
-    public static Sklb FromFile(string filePath)
+    public static SklbFormat FromFile(string filePath)
     {
         using var sklbStream = File.Open(filePath, FileMode.Open);
-        return new Sklb(new BinaryReader(sklbStream));
+        return new SklbFormat(new BinaryReader(sklbStream));
     }
 
-    public static Sklb FromBytes(byte[] data)
+    public static SklbFormat FromBytes(byte[] data)
     {
         using var stream = new MemoryStream(data);
-        return new Sklb(new BinaryReader(stream));
+        return new SklbFormat(new BinaryReader(stream));
     }
 }

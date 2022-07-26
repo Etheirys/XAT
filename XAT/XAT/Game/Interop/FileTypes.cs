@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace XAT.Common.Interop;
+namespace XAT.Game.Interop;
 
 public enum ContainerFileType
 {

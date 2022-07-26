@@ -1,5 +1,6 @@
-﻿using XAT.Common.FFXIV.Files;
-using XAT.Common.Havok;
+﻿using XAT.Game.Formats.Pap;
+using XAT.Game.Formats.Sklb;
+using XAT.Game.Havok;
 
 namespace XAT.Test.Integration;
 
@@ -9,7 +10,7 @@ public class EndToEndTests
     [TestMethod]
     public void SklbToFbx()
     {
-        var sklb = Sklb.FromFile("./TestFiles/skeleton.sklb");
+        var sklb = SklbFormat.FromFile("./TestFiles/skeleton.sklb");
         Assert.AreNotEqual(0, sklb.HavokData.Length);
 
         string tmpFileName = Path.GetTempFileName();
@@ -31,10 +32,10 @@ public class EndToEndTests
     [TestMethod]
     public void PapAndSklbToFbx()
     {
-        var pap = Pap.FromFile("./TestFiles/animation.pap");
+        var pap = PapFormat.FromFile("./TestFiles/animation.pap");
         Assert.AreNotEqual(0, pap.HavokData.Length);
 
-        var sklb = Sklb.FromFile("./TestFiles/skeleton.sklb");
+        var sklb = SklbFormat.FromFile("./TestFiles/skeleton.sklb");
         Assert.AreNotEqual(0, sklb.HavokData.Length);
 
         string tmpFileName = Path.GetTempFileName();

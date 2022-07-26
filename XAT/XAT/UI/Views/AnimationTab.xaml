@@ -62,7 +62,7 @@
 
             <GroupBox Header="Animation Data">
                 <StackPanel>
-                    <ComboBox VerticalAlignment="Top" ItemsSource="{Binding LoadedPap.AnimInfos}" SelectedItem="{Binding SelectedAnimation, Mode=TwoWay}" IsEnabled="{Binding IsLoaded}" />
+                    <ComboBox VerticalAlignment="Top" ItemsSource="{Binding LoadedPap.AnimEntries}" SelectedItem="{Binding SelectedAnimation, Mode=TwoWay}" IsEnabled="{Binding IsLoaded}" />
                     <StackPanel IsEnabled="{Binding SelectedAnimation, Converter={StaticResource NotNullToBoolConverter}}">
                         <Separator Opacity="0" Height="5"/>
                         <TextBlock Text="{Binding SelectedAnimation.HavokIndex, StringFormat= 'Havok Index: {0}'}" />

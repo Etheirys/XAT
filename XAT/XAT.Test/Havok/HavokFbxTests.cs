@@ -1,4 +1,4 @@
-﻿using XAT.Common.Havok;
+﻿using XAT.Game.Havok;
 
 namespace XAT.Test.Havok;
 

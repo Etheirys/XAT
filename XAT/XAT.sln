@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAT.Common", "XAT.Common\XAT.Common.csproj", "{88E55216-BD9F-4F8B-B349-C8F57B8B1251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XAT.Test", "XAT.Test\XAT.Test.csproj", "{30DFFD54-B57A-4D81-AD7B-8AD35F04EEFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAT.Test", "XAT.Test\XAT.Test.csproj", "{30DFFD54-B57A-4D81-AD7B-8AD35F04EEFA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAT", "XAT\XAT.csproj", "{3CFF2079-13D6-4A9E-B526-E8C338C46A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XAT", "XAT\XAT.csproj", "{3CFF2079-13D6-4A9E-B526-E8C338C46A5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88E55216-BD9F-4F8B-B349-C8F57B8B1251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88E55216-BD9F-4F8B-B349-C8F57B8B1251}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88E55216-BD9F-4F8B-B349-C8F57B8B1251}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88E55216-BD9F-4F8B-B349-C8F57B8B1251}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30DFFD54-B57A-4D81-AD7B-8AD35F04EEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30DFFD54-B57A-4D81-AD7B-8AD35F04EEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30DFFD54-B57A-4D81-AD7B-8AD35F04EEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU

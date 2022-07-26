@@ -3,8 +3,8 @@ using Serilog;
 using System;
 using System.IO;
 using System.Windows.Input;
-using XAT.Common.FFXIV.Files;
-using XAT.Common.Interop;
+using XAT.Game.Formats.Sklb;
+using XAT.Game.Interop;
 using XAT.UI.Utils;
 
 namespace XAT.UI.ViewModels;
@@ -25,7 +25,7 @@ public class SkeletonEditorViewModel
 
     public bool PreserveImportCompatibility { get; set; } = true;
 
-    public Sklb? LoadedSklb { get; set; }
+    public SklbFormat? LoadedSklb { get; set; }
 
     [DependsOn(nameof(LoadedSklb))]
     public bool IsLoaded => this.LoadedSklb != null;
@@ -46,7 +46,7 @@ public class SkeletonEditorViewModel
 
             try
             {
-                this.LoadedSklb = Sklb.FromFile(this.SklbPath);
+                this.LoadedSklb = SklbFormat.FromFile(this.SklbPath);
             }
             catch (Exception e)
             {

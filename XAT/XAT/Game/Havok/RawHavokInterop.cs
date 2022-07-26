@@ -1,8 +1,13 @@
 ﻿using Serilog;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace XAT.Common.Havok;
+namespace XAT.Game.Havok;
 
 public class RawHavokInterop
 {

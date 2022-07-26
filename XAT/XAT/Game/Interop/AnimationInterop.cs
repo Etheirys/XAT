@@ -1,11 +1,16 @@
-﻿using XAT.Common.FFXIV.Files;
-using XAT.Common.Havok;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using XAT.Game.Formats.Pap;
+using XAT.Game.Formats.Sklb;
+using XAT.Game.Havok;
 
-namespace XAT.Common.Interop;
+namespace XAT.Game.Interop;
 
 public static class AnimationInterop
 {
-    public static async Task<(int bonesConverted, int framesConverted)> ExportFBX(Pap pap, PapAnimInfo anim, Sklb sklb, string outputPath)
+    public static async Task<(int bonesConverted, int framesConverted)> ExportFBX(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -19,7 +24,7 @@ public static class AnimationInterop
         return result;
     }
 
-    public static async Task ExportHavok(ContainerFileType exportType, Pap pap, PapAnimInfo anim, Sklb sklb, bool bundleSkeleton, string outputPath)
+    public static async Task ExportHavok(ContainerFileType exportType, PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, bool bundleSkeleton, string outputPath)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -47,7 +52,7 @@ public static class AnimationInterop
         File.Delete(targetPath);
     }
 
-    public static async Task<(int framesConverted, int bonesBound)> ImportFBX(Pap pap, PapAnimInfo anim, Sklb sklb, string sourceFbx, int animStackIdx, List<string> excludedBones)
+    public static async Task<(int framesConverted, int bonesBound)> ImportFBX(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, string sourceFbx, int animStackIdx, List<string> excludedBones)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -69,7 +74,7 @@ public static class AnimationInterop
         return (fromResult.framesConverted, fromResult.bonesBound);
     }
 
-    public static async Task ImportHavok(Pap pap, PapAnimInfo anim, Sklb sklb, string sourceHavok, int sourceHavokIndex)
+    public static async Task ImportHavok(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, string sourceHavok, int sourceHavokIndex)
     {
         string targetPath = Path.GetTempFileName();
         int havokIndex = anim.HavokIndex;
@@ -82,7 +87,7 @@ public static class AnimationInterop
         File.Delete(targetPath);
     }
 
-    public static async Task QuantizedCompress(Pap pap, PapAnimInfo anim, Sklb sklb, float floatingTolerance, float translationTolerance, float rotationTolerance, float scaleTolerance)
+    public static async Task QuantizedCompress(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, float floatingTolerance, float translationTolerance, float rotationTolerance, float scaleTolerance)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -99,7 +104,7 @@ public static class AnimationInterop
         File.Delete(tmpNewTarget);
     }
 
-    public static async Task PredictiveCompress(Pap pap, PapAnimInfo anim, Sklb sklb, float staticFloatingTolerance, float staticTranslationTolerance, float staticRotationTolerance, float staticScaleTolerance, float dynamicFloatingTolerance, float dynamicTranslationTolerance, float dynamicRotationTolerance, float dynamicScaleTolerance)
+    public static async Task PredictiveCompress(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, float staticFloatingTolerance, float staticTranslationTolerance, float staticRotationTolerance, float staticScaleTolerance, float dynamicFloatingTolerance, float dynamicTranslationTolerance, float dynamicRotationTolerance, float dynamicScaleTolerance)
     {
         string targetPath = Path.GetTempFileName();
 
@@ -116,7 +121,7 @@ public static class AnimationInterop
         File.Delete(tmpNewTarget);
     }
 
-    private static async Task CreateSingle(Pap pap, PapAnimInfo anim, Sklb sklb, bool includeSkeleton, string targetPath)
+    private static async Task CreateSingle(PapFormat pap, PapAnimDataFormat anim, SklbFormat sklb, bool includeSkeleton, string targetPath)
     {
         await RawHavokInterop.CreateContainer(targetPath);
 

@@ -1,23 +1,26 @@
 ﻿using PropertyChanged;
-using System.Text;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using XAT.Game.Formats.Tmb;
+using XAT.Game.Formats.Utils;
 
-namespace XAT.Common.FFXIV.Files;
+namespace XAT.Game.Formats.Pap;
 
 [AddINotifyPropertyChangedInterface]
-public class Pap
+public class PapFormat
 {
-    private const string PAP_MAGIC = "pap ";
+    private const string MAGIC = "pap ";
 
     public int Skeleton { get; set; }
     public byte[] HavokData { get; set; }
-    public List<PapAnimInfo> AnimInfos { get; private set; } = new();
-    public List<Tmb> Timelines { get; private set; } = new();
+    public List<PapAnimation> Animations { get; private set; } = new();
 
-    public Pap(BinaryReader reader)
+    public PapFormat(BinaryReader reader)
     {
         // Magic
-        string magic = Encoding.ASCII.GetString(reader.ReadBytes(4));
-        if (magic != PAP_MAGIC)
+        string magic = reader.ReadEncodedString(4);
+        if (magic != MAGIC)
             throw new Exception("Invalid pap file - magic incorrect");
 
         // Version
@@ -35,11 +38,12 @@ public class Pap
         int timelineOffset = reader.ReadInt32(); // Timeline Offset
 
         // Anims
+        List<PapAnimDataFormat> dataList = new();
         reader.BaseStream.Seek(infoOffset, SeekOrigin.Begin);
         for (int i = 0; i < numAnims; i++)
         {
-            PapAnimInfo animInfo = new PapAnimInfo(reader);
-            this.AnimInfos.Add(animInfo);
+            PapAnimDataFormat animInfo = new(reader);
+            dataList.Add(animInfo);
         }
 
         // Havok Data
@@ -47,12 +51,22 @@ public class Pap
         this.HavokData = reader.ReadBytes(timelineOffset - havokOffset);
 
         // Timeline Data
+        List<TmbFormat> timelineList = new();
         reader.BaseStream.Seek(timelineOffset, SeekOrigin.Begin);
         for (int i = 0; i < numAnims; i++)
         {
-            Timelines.Add(new Tmb(reader));
+            timelineList.Add(new TmbFormat(reader));
             var requiredPadding = AlignBoundary(reader.BaseStream.Position, i, numAnims);
             _ = reader.ReadBytes(requiredPadding);
+        }
+
+        // Build the final list
+        if (timelineList.Count != dataList.Count)
+            throw new Exception("Anim data header count and timeline count does not match.");
+
+        for (int i = 0; i < numAnims; i++)
+        {
+            Animations.Add(new PapAnimation(dataList[i], timelineList[i]));
         }
     }
 
@@ -61,13 +75,13 @@ public class Pap
         int startPos = (int)writer.BaseStream.Position;
 
         // Magic
-        writer.Write(Encoding.ASCII.GetBytes(PAP_MAGIC));
+        writer.WriteEncodedString(MAGIC);
 
         // Version
         writer.Write(0x00020001);
 
         // Num Anims
-        writer.Write((short)this.AnimInfos.Count);
+        writer.Write((short)Animations.Count);
 
         // Skeleton
         writer.Write(this.Skeleton);
@@ -80,9 +94,9 @@ public class Pap
 
         // Anims
         int infoOffset = (int)writer.BaseStream.Position;
-        foreach (var animInfo in this.AnimInfos)
+        foreach (var animInfo in Animations)
         {
-            animInfo.Serialize(writer);
+            animInfo.Data.Serialize(writer);
         }
 
         // Havok Data
@@ -91,10 +105,11 @@ public class Pap
 
         // Timeline Data
         int timelineOffset = (int)writer.BaseStream.Position;
-        for (int i = 0; i < Timelines.Count; i++)
+        for (int i = 0; i < Animations.Count; i++)
         {
-            Timelines[i].Serialize(writer);
-            var requiredPadding = AlignBoundary(writer.BaseStream.Position, i, Timelines.Count);
+            var timeline = Animations[i].Timeline;
+            timeline.Serialize(writer);
+            var requiredPadding = AlignBoundary(writer.BaseStream.Position, i, Animations.Count);
             writer.Write(new byte[requiredPadding]);
         }
 
@@ -118,19 +133,19 @@ public class Pap
         this.Serialize(new BinaryWriter(stream));
     }
 
-    public static Pap FromFile(string filePath)
+    public static PapFormat FromFile(string filePath)
     {
         using var stream = File.Open(filePath, FileMode.Open);
-        return new Pap(new BinaryReader(stream));
+        return new PapFormat(new BinaryReader(stream));
     }
 
-    public static Pap FromBytes(byte[] data)
+    public static PapFormat FromBytes(byte[] data)
     {
         using var stream = new MemoryStream(data);
-        return new Pap(new BinaryReader(stream));
+        return new PapFormat(new BinaryReader(stream));
     }
 
-    private static int AlignBoundary(long position, int idx, int max) // From VFXEditor - looks like timeline needs to be 4 byte aligned
+    private static int AlignBoundary(long position, int idx, int max)
     {
         if (max > 1 && idx < max - 1)
         {

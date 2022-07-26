@@ -2,14 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using XAT.Common.FFXIV.Files;
-using XAT.Common.Havok;
-using XAT.Common.Interop;
 using Serilog;
 using System.IO;
 using System.Collections.ObjectModel;
 using XAT.UI.Views;
 using XAT.UI.Utils;
+using XAT.Game.Interop;
+using XAT.Game.Formats.Pap;
+using XAT.Game.Formats.Sklb;
+using XAT.Game.Havok;
 
 namespace XAT.UI.ViewModels;
 
@@ -42,9 +43,9 @@ class AnimationEditorViewModel
     public string SklbPath { get; set; } = string.Empty;
     public string PapPath { get; set; } = string.Empty;
 
-    public Pap? LoadedPap { get; set; }
-    public Sklb? LoadedSklb { get; set; }
-    public PapAnimInfo? SelectedAnimation { get; set; }
+    public PapFormat? LoadedPap { get; set; }
+    public SklbFormat? LoadedSklb { get; set; }
+    public PapAnimDataFormat? SelectedAnimation { get; set; }
 
     public string OutputPath { get; set; } = string.Empty;
 
@@ -82,8 +83,8 @@ class AnimationEditorViewModel
 
             try
             {
-                this.LoadedPap = Pap.FromFile(this.PapPath);
-                this.LoadedSklb = Sklb.FromFile(this.SklbPath);
+                this.LoadedPap = PapFormat.FromFile(this.PapPath);
+                this.LoadedSklb = SklbFormat.FromFile(this.SklbPath);
             }
             catch (Exception e)
             {
