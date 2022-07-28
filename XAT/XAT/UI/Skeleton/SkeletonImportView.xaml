@@ -31,7 +31,7 @@
             </StackPanel>
 
             <Separator Opacity="0" Height="10"/>
-            <Button Command="{Binding ImportSkeleton}" Content="Import"/>
+            <Button Command="{Binding ImportSkeleton}" IsEnabled="{Binding FileType, Converter={StaticResource NotNullToBoolConverter}}" Content="Import"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -11,32 +11,32 @@
 
     <!-- Double -->
     <DataTemplate DataType="{x:Type sys:Double}">
-        <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value, Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Double}}" />
     </DataTemplate>
 
     <!-- Float -->
     <DataTemplate DataType="{x:Type sys:Single}">
-        <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value, Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Single}}" />
     </DataTemplate>
 
     <!-- Byte -->
     <DataTemplate DataType="{x:Type sys:Byte}">
-            <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value, Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Byte}}" />
     </DataTemplate>
 
     <!-- Int16 (short) -->
     <DataTemplate DataType="{x:Type sys:Int16}">
-                <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value, Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Int16}}" />
     </DataTemplate>
 
     <!-- Int32 (int) -->
     <DataTemplate DataType="{x:Type sys:Int32}">
-                    <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value,  Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Int32}}" />
     </DataTemplate>
 
     <!-- Int64 (long) -->
     <DataTemplate DataType="{x:Type sys:Int64}">
-                        <TextBox Text="{Binding Value}" />
+        <TextBox Text="{Binding Value,  Converter={StaticResource NumberConverter}, ConverterParameter={x:Type sys:Int64}}" />
     </DataTemplate>
 
     <!-- Bool -->

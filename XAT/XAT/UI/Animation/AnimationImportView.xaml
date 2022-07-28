@@ -41,7 +41,7 @@
             </Grid>
 
             <Separator Opacity="0" Height="10"/>
-            <Button Command="{Binding ImportAnimation}" Content="Import"/>
+            <Button Command="{Binding ImportAnimation}" IsEnabled="{Binding SelectedImportTrackIndex, Converter={StaticResource NotNullToBoolConverter}}" Content="Import"/>
         </StackPanel>
     </Grid>
 </UserControl>
