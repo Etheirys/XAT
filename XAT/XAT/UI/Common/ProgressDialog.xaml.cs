@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace XAT.UI.Misc;
+namespace XAT.UI.Common;
 
 public partial class ProgressDialog : UserControl
 {

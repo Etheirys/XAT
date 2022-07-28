@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using XAT.UI.Utils.DependencyProperties;
 
-namespace XAT.UI.Misc;
+namespace XAT.UI.Common;
 
 public partial class ErrorDialog : UserControl
 {

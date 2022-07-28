@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+					xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:numerics="clr-namespace:System.Numerics;assembly=netstandard"
+                    xmlns:common="clr-namespace:XAT.UI.Common">
 
     <!-- String -->
     <DataTemplate DataType="{x:Type sys:String}">
@@ -45,10 +47,21 @@
 				  IsChecked="{Binding Value}"/>
     </DataTemplate>
 
+    <!-- Vector 3 -->
+    <DataTemplate DataType="{x:Type numerics:Vector3}">
+        <common:Vector3Editor Value="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Vector 4 -->
+    <DataTemplate DataType="{x:Type numerics:Vector4}">
+        <common:Vector4Editor Value="{Binding Value}" />
+    </DataTemplate>
+
     <!-- Everything Else -->
     <DataTemplate DataType="{x:Type sys:Void}">
-        <TextBlock VerticalAlignment="Center"
+            <TextBlock VerticalAlignment="Center"
 				   Text="{Binding Value}"/>
     </DataTemplate>
+
 
 </ResourceDictionary>
