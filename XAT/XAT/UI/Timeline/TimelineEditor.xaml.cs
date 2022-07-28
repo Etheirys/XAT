@@ -91,7 +91,7 @@ public partial class TimelineEditor : UserControl
             this.SelectedTrack?.Entries.Remove(toRemove);
     });
 
-    private void ListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    private void AddEntry(object sender, MouseButtonEventArgs e)
     {
         if (this.SelectedTrack == null)
             return;

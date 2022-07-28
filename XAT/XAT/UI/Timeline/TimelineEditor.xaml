@@ -88,6 +88,13 @@
 
                 <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.RowSpan="3" >
                     <StackPanel>
+                        <Expander HorizontalAlignment="Stretch" Header="Face Library"  BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" Margin="10, 10, 10, 0" >
+                            <StackPanel>
+                                <CheckBox IsChecked="{Binding Timeline.HasFaceLibrary}" Margin="10, 10, 10, 10">Enable Face Library</CheckBox>
+                                <inspector:InspectorView Target="{Binding Timeline.FaceLibrary}" Visibility="{Binding Timeline.FaceLibrary, Converter={StaticResource NotNullToVisibilityConverter}}" Margin="10" />
+                            </StackPanel>
+                        </Expander>
+
                         <Expander HorizontalAlignment="Stretch" Header="Actor Properties"  BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" Margin="10, 10, 10, 0" Visibility="{Binding SelectedActor, Converter={StaticResource NotNullToVisibilityConverter}}" >
                             <inspector:InspectorView Target="{Binding SelectedActor}" Margin="10" />
                         </Expander>
@@ -127,7 +134,7 @@
                         SelectedValue="{Binding SelectedNewEntryType, UpdateSourceTrigger=PropertyChanged}"
                         SelectedValuePath="Value"
                         ItemsSource="{Binding EntryTypes}"
-                        PreviewMouseLeftButtonUp="ListBox_PreviewMouseLeftButtonUp"
+                        PreviewMouseLeftButtonUp="AddEntry"
                         Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>

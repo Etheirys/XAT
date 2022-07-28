@@ -13,6 +13,22 @@ public class TmbFormat
     public const string MAGIC = "TMLB";
 
     public TmdhFormat Header { get; set; }
+
+    public bool HasFaceLibrary
+    {
+        get => FaceLibrary != null;
+        set
+        {
+            if (value && FaceLibrary == null)
+            {
+                FaceLibrary = new TmppFormat();
+            }
+            else if (!value && FaceLibrary != null)
+            {
+                FaceLibrary = null;
+            }
+        }
+    }
     public TmppFormat? FaceLibrary { get; set; }
     public TmalFormat ActorList { get; set; }
 

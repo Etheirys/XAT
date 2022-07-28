@@ -1,4 +1,5 @@
 ﻿using PropertyChanged;
+using XAT.Core;
 
 namespace XAT.Game.Formats.Tmb;
 
@@ -12,7 +13,8 @@ public class TmppFormat : TmbItemFormat
     public override int ExtraSize => 0;
     public override int TimelineCount => 0;
 
-    public string Path { get; set; }
+    [UserType]
+    public string Path { get; set; } = string.Empty;
 
     public TmppFormat(TmbReadContext context)
     {
@@ -20,6 +22,10 @@ public class TmppFormat : TmbItemFormat
 
         Path = context.ReadOffsetString();
 
+    }
+
+    public TmppFormat()
+    {
     }
 
     public override void Serialize(TmbWriteContext context)
