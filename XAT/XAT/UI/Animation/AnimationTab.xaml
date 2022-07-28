@@ -44,7 +44,7 @@
         </GroupBox>
 
         <GroupBox Grid.Column="0" Grid.Row="2" Header="Animation Select">
-            <ListBox ItemsSource="{Binding Pap.Animations}" SelectedItem="{Binding Animation, Mode=TwoWay}" DisplayMemberPath="Data.Name"/>
+            <ListBox ItemsSource="{Binding Pap.Animations}" SelectedValue="{Binding Animation, Mode=TwoWay}" DisplayMemberPath="Data.Name"/>
         </GroupBox>
 
         <local:AnimationEditor Animation="{Binding Animation}" Skeleton="{Binding Skeleton}"  Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" />

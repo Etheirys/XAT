@@ -12,9 +12,9 @@ public class TmbFormat
 {
     public const string MAGIC = "TMLB";
 
-    private TmdhFormat Header;
-    private TmppFormat? FaceLibrary;
-    private TmalFormat ActorHeader;
+    public TmdhFormat Header { get; set; }
+    public TmppFormat? FaceLibrary { get; set; }
+    public TmalFormat ActorList { get; set; }
 
     public TmbFormat(BinaryReader reader)
     {
@@ -66,7 +66,7 @@ public class TmbFormat
         // Actor list / header
         if (items.Dequeue() is TmalFormat tmal)
         {
-            ActorHeader = tmal;
+            ActorList = tmal;
         }
         else
         {
@@ -88,17 +88,17 @@ public class TmbFormat
         if(FaceLibrary != null)
             items.Add(FaceLibrary);
 
-        items.Add(ActorHeader);
+        items.Add(ActorList);
 
         // Now we crawl from the actor header finding all the actors, tracks and entries - we assign new ids as we go.
         {
-            foreach (var actorPointer in ActorHeader.Actors)
+            foreach (var actorPointer in ActorList.Actors)
             {
                 actorPointer.Item.Id = currentId++;
                 items.Add(actorPointer.Item);
             }
 
-            foreach (var actorPointer in ActorHeader.Actors)
+            foreach (var actorPointer in ActorList.Actors)
             {
                 foreach (var trackPointer in actorPointer.Item.Tracks)
                 {
@@ -111,7 +111,7 @@ public class TmbFormat
                 }
             }
 
-            foreach (var actor in ActorHeader.Actors)
+            foreach (var actor in ActorList.Actors)
             {
                 foreach (var trackPointer in actor.Item.Tracks)
                 {

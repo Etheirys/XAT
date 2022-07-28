@@ -24,7 +24,7 @@
 
                 <Separator Opacity="0" Height="15" />
 
-                <Button Command="{Binding SaveSklb}" IsEnabled="{Binding Pap, Converter={StaticResource NotNullToBoolConverter}}">
+                <Button Command="{Binding SaveSklb}" IsEnabled="{Binding Skeleton, Converter={StaticResource NotNullToBoolConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ContentSave" Margin="-8" VerticalAlignment="Center" />
                         <Separator Opacity="0" Width="10" />

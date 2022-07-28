@@ -1,5 +1,6 @@
 ﻿using PropertyChanged;
 using System.Numerics;
+using XAT.Core;
 
 namespace XAT.Game.Formats.Tmb.Entries;
 
@@ -13,13 +14,25 @@ public class C075Format : TmbEntry
     public override int ExtraSize => 4 * (3 + 3 + 3 + 4);
     public override int TimelineCount => 0;
 
+    [UserType]
     public int Duration { get; set; } = 10;
+
+    [UserType]
     public int Unk1 { get; set; } = 0;
+
+    [UserType]
     public int Unk2 { get; set; } = 0;
 
+    [UserType]
     public Vector3 Scale { get; set; } = new(1);
+
+    [UserType]
     public Vector3 Rotation { get; set; } = new(0);
+
+    [UserType]
     public Vector3 Position { get; set; } = new(0);
+
+    [UserType]
     public Vector4 RGBA { get; set; } = new(1);
 
     public C075Format()

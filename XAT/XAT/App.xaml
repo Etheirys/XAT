@@ -17,6 +17,7 @@
             <converters:NotZeroToBoolConverter x:Key="NotZeroToBoolConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter" />
+            <converters:ListBoxIndexConverter x:Key="ListBoxIndexConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

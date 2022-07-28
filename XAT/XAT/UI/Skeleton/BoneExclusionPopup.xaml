@@ -24,7 +24,7 @@
                     </Button>
                 </DockPanel>
             </GroupBox.Header>
-            <ListBox ItemsSource="{Binding ExcludedBones}" SelectedItem="{Binding Path=SelectedExcludeBone}" />
+            <ListBox ItemsSource="{Binding ExcludedBones}" SelectedValue="{Binding Path=SelectedExcludeBone}" />
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
@@ -52,7 +52,7 @@
         </StackPanel>
 
         <GroupBox Header="Included" Grid.Row="2"  Height="220" Width="400">
-            <ListBox ItemsSource="{Binding IncludedBones}" SelectedItem="{Binding Path=SelectedIncludeBone}" />
+            <ListBox ItemsSource="{Binding IncludedBones}" SelectedValue="{Binding Path=SelectedIncludeBone}" />
         </GroupBox>
 
 

@@ -181,11 +181,11 @@ public class TmbWriteContext
         }
     }
        
-    public void WriteOffsetTimeline<T>(List<TmbPointer<T>> entries) where T :TmbItemWithIdFormat
+    public void WriteOffsetTimeline<T>(IEnumerable<TmbPointer<T>> entries) where T :TmbItemWithIdFormat
     {
         int actualPos = (int)((BodySize - (SubDocumentStartPosition + 8)) + ExtraSize + TimelineWriter.BaseStream.Position);
         Writer.Write(actualPos);
-        Writer.Write(entries.Count);
+        Writer.Write(entries.Count());
 
         foreach(var entry in entries)
         {
@@ -221,6 +221,19 @@ public class TmbWriteContext
 public class TmbRawPointer
 {
     public TmbItemWithIdFormat? Item { get; set; }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is TmbRawPointer other)
+            return other.Item == Item;
+
+        return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(base.GetHashCode(), Item?.GetHashCode());
+    }
 }
 
 public class TmbPointer<T> where T : TmbItemWithIdFormat
@@ -246,5 +259,27 @@ public class TmbPointer<T> where T : TmbItemWithIdFormat
     public TmbPointer(TmbRawPointer raw)
     {
         Raw = raw;
+    }
+
+    public TmbPointer(T raw)
+    {
+        Raw = new TmbRawPointer();
+        Raw.Item = raw;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is TmbPointer<T> other)
+            return other.Item == Item;
+
+        if (obj is TmbRawPointer other2)
+            return other2.Item == Raw.Item;
+
+        return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(base.GetHashCode(), Item?.GetHashCode(), Raw?.GetHashCode());
     }
 }

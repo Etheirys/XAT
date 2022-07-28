@@ -1,5 +1,7 @@
 ﻿using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using XAT.Core;
 
 namespace XAT.Game.Formats.Tmb;
 
@@ -13,10 +15,13 @@ public class TmacFormat : TmbItemWithTimeFormat
     public override int ExtraSize => 0;
     public override int TimelineCount => Tracks.Count;
 
+    [UserType]
     public int Unk1 { get; set; }
+
+    [UserType]
     public int Unk2 { get; set; }
 
-    public List<TmbPointer<TmtrFormat>> Tracks;
+    public ObservableCollection<TmbPointer<TmtrFormat>> Tracks { get; set; }
 
 
     public TmacFormat(TmbReadContext context)
@@ -26,8 +31,14 @@ public class TmacFormat : TmbItemWithTimeFormat
         Unk1 = context.Reader.ReadInt32();
         Unk2 = context.Reader.ReadInt32();
 
-        Tracks = context.ReadOffsetTimeline<TmtrFormat>();
+        Tracks = new(context.ReadOffsetTimeline<TmtrFormat>());
     }
+
+    public TmacFormat()
+    {
+        Tracks = new();
+    }
+
     public override void Serialize(TmbWriteContext context)
     {
         WriteHeader(context);

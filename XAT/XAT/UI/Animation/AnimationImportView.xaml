@@ -13,7 +13,7 @@
             <common:FilePicker Hint="Import File" HelperText="The source import file location." FileFilter="{Binding FileTypeFilters, Mode=OneTime}" FileSelected="OnImportFileLoaded" />
 
             <Separator Opacity="0" Height="20"/>
-            <ComboBox VerticalAlignment="Top" materialDesign:HintAssist.Hint="Track" materialDesign:HintAssist.HelperText="The animation track to import." ItemsSource="{Binding ImportTracks}" SelectedItem="{Binding SelectedImportTrack}" IsEnabled="{Binding ImportTracks.Count, Converter={StaticResource NotZeroToBoolConverter}}" />
+            <ComboBox VerticalAlignment="Top" materialDesign:HintAssist.Hint="Track" materialDesign:HintAssist.HelperText="The animation track to import." ItemsSource="{Binding ImportTracks}" SelectedValue="{Binding SelectedImportTrack}" IsEnabled="{Binding ImportTracks.Count, Converter={StaticResource NotZeroToBoolConverter}}" />
 
             <Separator Opacity="0" Height="20"/>
             <Grid>

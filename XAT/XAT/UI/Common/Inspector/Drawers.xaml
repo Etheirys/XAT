@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- String -->
+    <DataTemplate DataType="{x:Type sys:String}">
+        <TextBox VerticalAlignment="Center"
+				 Text="{Binding Value}"
+				 Style="{StaticResource MaterialDesignTextBox}"/>
+    </DataTemplate>
+
+    <!-- Double -->
+    <DataTemplate DataType="{x:Type sys:Double}">
+        <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Float -->
+    <DataTemplate DataType="{x:Type sys:Single}">
+        <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Byte -->
+    <DataTemplate DataType="{x:Type sys:Byte}">
+            <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Int16 (short) -->
+    <DataTemplate DataType="{x:Type sys:Int16}">
+                <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Int32 (int) -->
+    <DataTemplate DataType="{x:Type sys:Int32}">
+                    <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Int64 (long) -->
+    <DataTemplate DataType="{x:Type sys:Int64}">
+                        <TextBox Text="{Binding Value}" />
+    </DataTemplate>
+
+    <!-- Bool -->
+    <DataTemplate DataType="{x:Type sys:Boolean}">
+        <CheckBox VerticalAlignment="Center"
+				  IsChecked="{Binding Value}"/>
+    </DataTemplate>
+
+    <!-- Everything Else -->
+    <DataTemplate DataType="{x:Type sys:Void}">
+        <TextBlock VerticalAlignment="Center"
+				   Text="{Binding Value}"/>
+    </DataTemplate>
+
+</ResourceDictionary>

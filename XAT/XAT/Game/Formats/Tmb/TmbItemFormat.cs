@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Text;
+using XAT.Core;
 using XAT.Game.Formats.Utils;
 
 namespace XAT.Game.Formats.Tmb;
@@ -81,6 +82,7 @@ public abstract class TmbItemWithIdFormat : TmbItemFormat
 [AddINotifyPropertyChangedInterface]
 public abstract class TmbItemWithTimeFormat : TmbItemWithIdFormat
 {
+    [UserType]
     public short Time { get; set; }
 
     protected override void ReadHeader(TmbReadContext context)
