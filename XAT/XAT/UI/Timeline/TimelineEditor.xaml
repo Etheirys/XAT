@@ -40,7 +40,7 @@
 
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Command="{Binding AddActor}">
+                            <Button Command="{Binding AddActor}" IsEnabled="{Binding Timeline, Converter={StaticResource NotNullToBoolConverter}}">
                                 <materialDesign:PackIcon Kind="Plus" Margin="-8" />
                             </Button>
 

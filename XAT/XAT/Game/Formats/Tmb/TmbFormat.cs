@@ -14,6 +14,7 @@ public class TmbFormat
 
     public TmdhFormat Header { get; set; }
 
+    [DependsOn(nameof(FaceLibrary))]
     public bool HasFaceLibrary
     {
         get => FaceLibrary != null;
@@ -173,5 +174,30 @@ public class TmbFormat
         writer.BaseStream.Seek(startPos + 4, SeekOrigin.Begin);
         writer.Write((int)(endPos - startPos));
         writer.BaseStream.Seek(endPos, SeekOrigin.Begin);
+    }
+
+    public byte[] ToBytes()
+    {
+        using var stream = new MemoryStream();
+        this.Serialize(new BinaryWriter(stream));
+        return stream.ToArray();
+    }
+
+    public void ToFile(string filePath)
+    {
+        using var sklbStream = File.Open(filePath, FileMode.Create);
+        this.Serialize(new BinaryWriter(sklbStream));
+    }
+
+    public static TmbFormat FromFile(string filePath)
+    {
+        using var stream = File.Open(filePath, FileMode.Open);
+        return new TmbFormat(new BinaryReader(stream));
+    }
+
+    public static TmbFormat FromBytes(byte[] data)
+    {
+        using var stream = new MemoryStream(data);
+        return new TmbFormat(new BinaryReader(stream));
     }
 }

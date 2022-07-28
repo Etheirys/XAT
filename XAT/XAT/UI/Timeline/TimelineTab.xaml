@@ -9,6 +9,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="515" d:DesignWidth="900">
     <Grid Name="ContentArea">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Column="0" Grid.Row="0" Header="Load / Save">
+            <StackPanel>
+                <common:FilePicker FileSelected="OnLoadTmb" FileFilter="TMB File|*.tmb" HelperText="The Loaded TMB." Hint="TMB Path" />
+                <Separator Opacity="0" Height="20" />
+
+                <Separator />
+
+                <Separator Opacity="0" Height="15" />
+
+                <Button Command="{Binding SaveTmb}" IsEnabled="{Binding Tmb, Converter={StaticResource NotNullToBoolConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ContentSave" Margin="-8" VerticalAlignment="Center" />
+                        <Separator Opacity="0" Width="10" />
+                        <TextBlock>Save</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </GroupBox>
+
+        <local:TimelineEditor Timeline="{Binding Tmb}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" />
     </Grid>
 </UserControl>

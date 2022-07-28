@@ -6,9 +6,7 @@
 
     <!-- String -->
     <DataTemplate DataType="{x:Type sys:String}">
-        <TextBox VerticalAlignment="Center"
-				 Text="{Binding Value}"
-				 Style="{StaticResource MaterialDesignTextBox}"/>
+        <TextBox VerticalAlignment="Center" Text="{Binding Value}" Style="{StaticResource MaterialDesignTextBox}"/>
     </DataTemplate>
 
     <!-- Double -->
@@ -43,8 +41,7 @@
 
     <!-- Bool -->
     <DataTemplate DataType="{x:Type sys:Boolean}">
-        <CheckBox VerticalAlignment="Center"
-				  IsChecked="{Binding Value}"/>
+        <CheckBox VerticalAlignment="Center" IsChecked="{Binding Value}"/>
     </DataTemplate>
 
     <!-- Vector 3 -->
@@ -59,9 +56,6 @@
 
     <!-- Everything Else -->
     <DataTemplate DataType="{x:Type sys:Void}">
-            <TextBlock VerticalAlignment="Center"
-				   Text="{Binding Value}"/>
+        <TextBlock VerticalAlignment="Center" Text="{Binding Value}"/>
     </DataTemplate>
-
-
 </ResourceDictionary>
