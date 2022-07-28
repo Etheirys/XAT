@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 using XAT.UI.Utils;
 
-namespace XAT.UI.ViewModels;
+namespace XAT.UI.Skeleton;
 
 [AddINotifyPropertyChangedInterface]
-public class BoneExclusionViewModel
+public partial class BoneExclusionPopup : UserControl
 {
     public ObservableCollection<string> ExcludedBones { get; set; } = new();
 
@@ -21,6 +22,13 @@ public class BoneExclusionViewModel
     public string SelectedExcludeBone { get; set; } = string.Empty;
 
     public string SelectedIncludeBone { get; set; } = string.Empty;
+
+    public BoneExclusionPopup()
+    {
+        InitializeComponent();
+        this.ContentArea.DataContext = this;
+    }
+
 
     public ICommand ExcludeBone => new Command((_) =>
     {

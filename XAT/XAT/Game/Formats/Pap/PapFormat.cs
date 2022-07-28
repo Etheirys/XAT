@@ -66,7 +66,7 @@ public class PapFormat
 
         for (int i = 0; i < numAnims; i++)
         {
-            Animations.Add(new PapAnimation(dataList[i], timelineList[i]));
+            Animations.Add(new PapAnimation(this, i, dataList[i], timelineList[i]));
         }
     }
 

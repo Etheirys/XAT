@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
 
-namespace XAT.UI.Views;
+namespace XAT.UI.Misc;
 
 public partial class HelpTab : UserControl
 {
@@ -37,6 +37,4 @@ public partial class HelpTab : UserControl
             UseShellExecute = true
         });
     }
-
-    
 }

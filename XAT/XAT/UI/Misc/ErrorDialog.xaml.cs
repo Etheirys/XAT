@@ -1,11 +1,11 @@
 ﻿using System.Windows.Controls;
 using XAT.UI.Utils.DependencyProperties;
 
-namespace XAT.UI.Views;
+namespace XAT.UI.Misc;
 
 public partial class ErrorDialog : UserControl
 {
-    public static readonly DependencyBinding<string> MessageProperty = Binder.Register<string, FileChooser>(nameof(Message));
+    public static readonly DependencyBinding<string> MessageProperty = Binder.Register<string, ErrorDialog>(nameof(Message));
 
     public string Message
     {

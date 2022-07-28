@@ -5,4 +5,4 @@ namespace XAT.Game.Formats.Pap;
 
 
 [AddINotifyPropertyChangedInterface]
-public record class PapAnimation(PapAnimDataFormat Data, TmbFormat Timeline);
+public record class PapAnimation(PapFormat Container, int Index, PapAnimDataFormat Data, TmbFormat Timeline);
