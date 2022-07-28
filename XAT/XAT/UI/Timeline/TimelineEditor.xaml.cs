@@ -8,6 +8,8 @@ using XAT.UI.Utils.DependencyProperties;
 using XAT.Game.Formats.Tmb.Entries;
 using System.Collections.ObjectModel;
 using System;
+using Serilog;
+using Microsoft.Win32;
 
 namespace XAT.UI.Timeline;
 
@@ -103,12 +105,12 @@ public partial class TimelineEditor : UserControl
 
         Type? type = lb.SelectedValue as Type;
 
-        if(type != null && type.IsAssignableTo(typeof(TmbItemWithTimeFormat)))
+        if (type != null && type.IsAssignableTo(typeof(TmbItemWithTimeFormat)))
         {
             TmbItemWithTimeFormat? entry = null;
 
-            var newCtr = type.GetConstructor(new Type[] {});
-            if(newCtr != null)
+            var newCtr = type.GetConstructor(new Type[] { });
+            if (newCtr != null)
             {
                 entry = newCtr.Invoke(new object[] { }) as TmbItemWithTimeFormat;
             }
@@ -121,4 +123,68 @@ public partial class TimelineEditor : UserControl
             MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(this, this.DrawerHost);
         }
     }
+
+    public ICommand ImportTimeline => new Command(async (item) =>
+    {
+
+        OpenFileDialog dialog = new();
+        dialog.Filter = "TMB File|*.tmb";
+
+        if (dialog.ShowDialog() == true)
+        {
+            using (new ProgressWrapper())
+            {
+                string filePath = dialog.FileName;
+
+                Log.Information($"Attempting to import tmb '{filePath}'...");
+
+                try
+                {
+                    this.Timeline = TmbFormat.FromFile(filePath);
+                }
+                catch (Exception e)
+                {
+                    this.Timeline = null;
+                    Log.Error($"Error importing: {e}", e);
+                    await DialogUtils.ShowErrorPopup($"Error importing: {e.Message}");
+                }
+
+                DialogUtils.ShowSnackbar("Successfully imported tmb.");
+                Log.Information("Successfully imported tmb.");
+            }
+        }
+    });
+
+    public ICommand ExportTimeline => new Command(async (item) =>
+    {
+        if (Timeline == null)
+            return;
+
+        SaveFileDialog dialog = new();
+        dialog.Filter = "TMB File|*.tmb";
+
+        if (dialog.ShowDialog() == true)
+        {
+            using (new ProgressWrapper())
+            {
+                string filePath = dialog.FileName;
+
+                Log.Information($"Attempting to export tmb '{filePath}'...");
+
+                try
+                {
+                    this.Timeline.ToFile(filePath);
+                }
+                catch (Exception e)
+                {
+                    this.Timeline = null;
+                    Log.Error($"Error exporting: {e}", e);
+                    await DialogUtils.ShowErrorPopup($"Error exporting: {e.Message}");
+                }
+
+                DialogUtils.ShowSnackbar("Successfully exported tmb.");
+                Log.Information("Successfully exported tmb.");
+            }
+        }
+    });
 }

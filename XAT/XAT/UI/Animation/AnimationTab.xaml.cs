@@ -14,7 +14,7 @@ namespace XAT.UI.Animation;
 [AddINotifyPropertyChangedInterface]
 public partial class AnimationTab : UserControl
 {
-    
+
     public PapFormat? Pap { get; set; }
 
     public PapAnimation? Animation { get; set; }
@@ -68,7 +68,7 @@ public partial class AnimationTab : UserControl
                 this.Skeleton = null;
                 Log.Error($"Error importing: {e}", e);
                 await DialogUtils.ShowErrorPopup($"Error importing: {e.Message}");
-                return false ;
+                return false;
             }
 
             DialogUtils.ShowSnackbar("Successfully loaded source sklb.");
@@ -83,13 +83,13 @@ public partial class AnimationTab : UserControl
         if (Pap == null)
             return;
 
-        using (new ProgressWrapper())
+        SaveFileDialog dialog = new();
+
+        dialog.Filter = "PAP File|*.pap";
+
+        if (dialog.ShowDialog() == true)
         {
-            SaveFileDialog dialog = new();
-
-            dialog.Filter = "PAP File|*.pap";
-
-            if (dialog.ShowDialog() == true)
+            using (new ProgressWrapper())
             {
                 string path = dialog.FileName;
 

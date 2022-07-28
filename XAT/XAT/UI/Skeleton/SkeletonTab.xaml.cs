@@ -52,13 +52,13 @@ public partial class SkeletonTab : UserControl
         if (Skeleton == null)
             return;
 
-        using (new ProgressWrapper())
+        SaveFileDialog dialog = new();
+
+        dialog.Filter = "SKLB File|*.sklb";
+
+        if (dialog.ShowDialog() == true)
         {
-            SaveFileDialog dialog = new();
-
-            dialog.Filter = "SKLB File|*.sklb";
-
-            if (dialog.ShowDialog() == true)
+            using (new ProgressWrapper())
             {
                 string path = dialog.FileName;
                 Log.Information($"Attempting to save sklb '{path}'...");

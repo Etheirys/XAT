@@ -88,8 +88,29 @@
 
                 <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.RowSpan="3" >
                     <StackPanel>
-                        <Expander HorizontalAlignment="Stretch" Header="Face Library"  BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" Margin="10, 10, 10, 0" >
+                        <Expander HorizontalAlignment="Stretch" Header="Timeline Properties" BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" Margin="10, 10, 10, 0" Visibility="{Binding Timeline, Converter={StaticResource NotNullToVisibilityConverter}}">
                             <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                                    <Button Command="{Binding ImportTimeline}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Import" Margin="-8" VerticalAlignment="Center" />
+                                            <Separator Opacity="0" Width="10" />
+                                            <TextBlock>Import</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Separator Opacity="0" Width="10" />
+
+                                    <Button Command="{Binding ExportTimeline}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Export" Margin="-8" VerticalAlignment="Center" />
+                                            <Separator Opacity="0" Width="10" />
+                                            <TextBlock>Export</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                                <Separator />
                                 <CheckBox IsChecked="{Binding Timeline.HasFaceLibrary}" Margin="10, 10, 10, 10">Enable Face Library</CheckBox>
                                 <inspector:InspectorView Target="{Binding Timeline.FaceLibrary}" Visibility="{Binding Timeline.FaceLibrary, Converter={StaticResource NotNullToVisibilityConverter}}" Margin="10" />
                             </StackPanel>
