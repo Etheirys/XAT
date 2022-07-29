@@ -13,7 +13,7 @@ jobs:
       uses: josStorer/get-current-time@v2
       id: version-date
       with:
-        format: YY.DDD.HHmm
+        format: YYYY.MM.DD.HHmm
 
     - name: Checkout
       uses: actions/checkout@v2
