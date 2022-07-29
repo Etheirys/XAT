@@ -1,4 +1,5 @@
-﻿using XAT.Common.FFXIV.Files;
+﻿using XAT.Game.Formats.Pap;
+using XAT.Game.Formats.Sklb;
 
 namespace XAT.Test.Game;
 
@@ -8,20 +9,20 @@ public class GameBasicTests
     [TestMethod]
     public void ReadSklb()
     {
-        var result = Sklb.FromFile("./TestFiles/skeleton.sklb");
+        var result = SklbFormat.FromFile("./TestFiles/skeleton.sklb");
         Assert.AreNotEqual(0, result.HavokData.Length); 
     }
 
     [TestMethod]
     public void ReadWriteReadSklb()
     {
-        var result = Sklb.FromFile("./TestFiles/skeleton.sklb");
+        var result = SklbFormat.FromFile("./TestFiles/skeleton.sklb");
         Assert.AreNotEqual(0, result.HavokData.Length);
 
         string tmpFile = Path.GetTempFileName();
         result.ToFile(tmpFile);
 
-        result = Sklb.FromFile(tmpFile);
+        result = SklbFormat.FromFile(tmpFile);
         Assert.AreNotEqual(0, result.HavokData.Length);
 
         File.Delete(tmpFile);
@@ -30,15 +31,15 @@ public class GameBasicTests
     [TestMethod]
     public void ReadPap()
     {
-        var result = Pap.FromFile("./TestFiles/animation.pap");
+        var result = PapFormat.FromFile("./TestFiles/animation.pap");
         Assert.AreEqual(101, result.Skeleton);
-        Assert.AreEqual(1, result.AnimInfos.Count);
+        Assert.AreEqual(1, result.Animations.Count);
     }
 
     [TestMethod]
     public void ReadWriteReadPap()
     {
-        var result = Pap.FromFile("./TestFiles/animation.pap");
+        var result = PapFormat.FromFile("./TestFiles/animation.pap");
         Assert.AreEqual(101, result.Skeleton);
 
         result.Skeleton = 42;
@@ -46,7 +47,7 @@ public class GameBasicTests
         string tmpFile = Path.GetTempFileName();
         result.ToFile(tmpFile);
 
-        result = Pap.FromFile(tmpFile);
+        result = PapFormat.FromFile(tmpFile);
         Assert.AreEqual(42, result.Skeleton);
 
         File.Delete(tmpFile);

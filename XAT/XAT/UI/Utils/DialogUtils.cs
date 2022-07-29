@@ -1,10 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using XAT.Services;
-using XAT.UI.Views;
+using XAT.UI.Common;
 
 namespace XAT.UI.Utils;
 

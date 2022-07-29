@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XAT.UI.Windows"
-        xmlns:views="clr-namespace:XAT.UI.Views"
+        xmlns:animation="clr-namespace:XAT.UI.Animation"
+        xmlns:skeleton="clr-namespace:XAT.UI.Skeleton"
+        xmlns:timeline="clr-namespace:XAT.UI.Timeline"
+        xmlns:misc="clr-namespace:XAT.UI.Misc"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -12,7 +15,9 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="XAT - The XIV Animation Toolkit" Height="615" Width="900">
+        Title="XAT - The XIV Animation Toolkit" 
+        Height="615" Width="900" MinHeight="615" MinWidth="900"
+        >
     <Grid Name="ContentArea">
         <TabControl>
             <TabControl.ContentTemplate>
@@ -24,15 +29,19 @@
             </TabControl.ContentTemplate>
 
             <TabItem Header="Animation">
-                <views:AnimationTab />
+                <animation:AnimationTab />
             </TabItem>
             
             <TabItem Header="Skeleton">
-                <views:SkeletonTab/>
+                <skeleton:SkeletonTab />
             </TabItem>
-            
+
+            <TabItem Header="Timeline">
+                <timeline:TimelineTab />
+            </TabItem>
+
             <TabItem Header="Help">
-                <views:HelpTab />
+                <misc:HelpTab />
             </TabItem>
         </TabControl>
 

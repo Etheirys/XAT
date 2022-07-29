@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="XAT.UI.Animation.AnimationEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:XAT.UI.Animation"
+             xmlns:timeline="clr-namespace:XAT.UI.Timeline"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Name="ContentArea">
+        <TabControl IsEnabled="{Binding Animation, Converter={StaticResource NotNullToBoolConverter}}">
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1, 0, 1, 1" Padding="5">
+                        <ContentPresenter Content="{Binding}"/>
+                    </Border>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+
+            <TabItem Header="Import / Export">
+                <StackPanel>
+                    <GroupBox Header="Import">
+                        <local:AnimationImportView Animation="{Binding Animation}" Skeleton="{Binding Skeleton}" />
+                    </GroupBox>
+
+                    <Separator Opacity="0" Height="10" />
+
+                    <GroupBox Header="Export">
+                        <local:AnimationExportView Animation="{Binding Animation}" Skeleton="{Binding Skeleton}" />
+                    </GroupBox>
+                </StackPanel>
+
+            </TabItem>
+
+            <TabItem Header="Timeline">
+                <timeline:TimelineEditor Timeline="{Binding Animation.Timeline}" />
+            </TabItem>
+
+            <TabItem Header="Compression">
+                <local:AnimationCompressionView Animation="{Binding Animation}" Skeleton="{Binding Skeleton}" />
+            </TabItem>
+
+            <TabItem Header="Advanced">
+                <StackPanel>
+                    <TextBox Text="{Binding Animation.Data.Name}" materialDesign:HintAssist.Hint="Animation Name" materialDesign:HintAssist.HelperText="The name of this animation." />
+
+                    <Separator Opacity="0" Height="20"/>
+                    <TextBox Text="{Binding Animation.Data.HavokIndex}" materialDesign:HintAssist.Hint="Havok Index" materialDesign:HintAssist.HelperText="The havok index this animation is linked to." />
+
+                    <Separator Opacity="0" Height="20"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
