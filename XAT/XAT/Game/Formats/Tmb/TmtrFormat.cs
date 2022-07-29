@@ -12,16 +12,12 @@ public class TmtrFormat : TmbItemWithTimeFormat
     public override string Magic => MAGIC;
 
     public override int Size => 0x18;
-    public override int ExtraSize => 0;
+    public override int ExtraSize => UnknownExtraEntries.Count == 0 ? 0 : 8 + (12 * UnknownExtraEntries.Count);
     public override int TimelineCount => Entries.Count;
 
-    [UserType]
-    public int Unk1 { get; set; }
-
-    [UserType]
-    public int Unk2 { get; set; }
-
     public ObservableCollection<TmbPointer<TmbItemWithTimeFormat>> Entries { get; set; } = new();
+
+    public ObservableCollection<TmTrUnknownData> UnknownExtraEntries { get; set; } = new();
 
 
     public TmtrFormat(TmbReadContext context)
@@ -30,9 +26,17 @@ public class TmtrFormat : TmbItemWithTimeFormat
 
         Entries = new(context.ReadOffsetTimeline<TmbItemWithTimeFormat>());
 
-        int unknownOffset = context.Reader.ReadInt32();
-        if (unknownOffset != 0)
-            throw new Exception("Not yet");
+        // Deal with unknown extras
+        context.ReadAtOffset((reader) =>
+        {
+            _ = reader.ReadInt32(); // 8
+            int count = reader.ReadInt32();
+
+            for(int i = 0; i < count; i++)
+            {
+                UnknownExtraEntries.Add(new TmTrUnknownData(reader));
+            }
+        });
     }
 
     public TmtrFormat()
@@ -45,6 +49,24 @@ public class TmtrFormat : TmbItemWithTimeFormat
 
         context.WriteOffsetTimeline(Entries);
 
-        context.Writer.Write((int)0);
+        // Deal with unknown extras
+        if(UnknownExtraEntries.Count > 0)
+        {
+            context.WriteExtra((writer) =>
+            {
+                writer.Write((int)8);
+                writer.Write(UnknownExtraEntries.Count);
+
+                foreach (var entry in UnknownExtraEntries)
+                {
+                    entry.Serialize(writer);
+                }
+            });
+        } 
+        else
+        {
+            context.Writer.Write((int)0);
+        }
+       
     }
 }

@@ -125,6 +125,10 @@ public class TmbReadContext
     public void ReadAtOffset(Action<BinaryReader> func)
     {
         int offset = Reader.ReadInt32();
+
+        if (offset == 0)
+            return;
+
         var currentPos = Reader.BaseStream.Position;
 
         Reader.BaseStream.Seek(offset + SubDocumentStartPosition + 8, SeekOrigin.Begin);

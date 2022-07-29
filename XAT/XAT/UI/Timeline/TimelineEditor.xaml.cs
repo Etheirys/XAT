@@ -71,13 +71,13 @@ public partial class TimelineEditor : UserControl
 
     public ICommand DeleteTrack => new Command((_) =>
     {
-        if (this.SelectedTrack == null)
+        if (this.SelectedActor == null || this.SelectedTrack == null)
             return;
 
-        var toRemove = this.SelectedActor?.Tracks.Where(x => x.Item == this.SelectedTrack).First();
+        var toRemove = this.SelectedActor.Tracks.Where(x => x.Item == this.SelectedTrack).First();
 
         if (toRemove != null)
-            this.SelectedActor?.Tracks.Remove(toRemove);
+            this.SelectedActor.Tracks.Remove(toRemove);
     });
 
     public ICommand DeleteEntry => new Command((item) =>
@@ -87,10 +87,19 @@ public partial class TimelineEditor : UserControl
 
         var entry = (TmbEntry)item;
 
-        var toRemove = this.SelectedTrack?.Entries.Where(x => x.Item == entry).First();
+        var toRemove = this.SelectedTrack.Entries.Where(x => x.Item == entry).First();
 
         if (toRemove != null)
-            this.SelectedTrack?.Entries.Remove(toRemove);
+            this.SelectedTrack.Entries.Remove(toRemove);
+    });
+
+    public ICommand DeleteUnknownExtraEntry => new Command((item) =>
+    {
+        if (SelectedTrack == null || item is not TmTrUnknownData)
+            return;
+
+        var entry = (TmTrUnknownData)item;
+        this.SelectedTrack.UnknownExtraEntries.Remove(entry);
     });
 
     private void AddEntry(object sender, MouseButtonEventArgs e)

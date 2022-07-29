@@ -124,6 +124,22 @@
                             <inspector:InspectorView Target="{Binding SelectedTrack}" Margin="10" />
                         </Expander>
 
+                        <ItemsControl ItemsSource="{Binding SelectedTrack.UnknownExtraEntries}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Expander HorizontalAlignment="Stretch" Header="Unknown Extra Data"  BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="1" Margin="10, 10, 10, 0">
+
+                                        <StackPanel>
+                                            <inspector:InspectorView Target="{Binding }" Margin="10" />
+                                            <Button Command="{Binding DeleteUnknownExtraEntry, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimelineEditor}}" CommandParameter="{Binding }" Width="35" HorizontalAlignment="Right" Margin="0, 0, 10, 5">
+                                                <materialDesign:PackIcon Kind="Delete" Margin="-8" />
+                                            </Button>
+                                        </StackPanel>
+                                    </Expander>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
                         <ItemsControl ItemsSource="{Binding SelectedTrack.Entries}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -149,7 +165,6 @@
 
             <materialDesign:DrawerHost.RightDrawerContent>
                 <DockPanel MinWidth="220">
-
                     <ListBox 
                         Margin="0 16 0 16"
                         SelectedValue="{Binding SelectedNewEntryType, UpdateSourceTrigger=PropertyChanged}"
@@ -161,7 +176,7 @@
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:DemoItem">
+                            <DataTemplate>
                                 <TextBlock Text="{Binding Key}" Margin="10 4 0 4"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
