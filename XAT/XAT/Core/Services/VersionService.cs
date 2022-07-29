@@ -2,6 +2,7 @@
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -21,11 +22,12 @@ public class VersionService : ServiceBase<VersionService>
 
     public override Task Start()
     {
-#if !DEBUG
-        AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-        AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) XAT Client";
-        AutoUpdater.Start("https://api.github.com/repos/AsgardXIV/XAT/releases/latest");
-#endif
+        if (!Debugger.IsAttached)
+        {
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+            AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) XAT Client";
+            AutoUpdater.Start("https://api.github.com/repos/AsgardXIV/XAT/releases/latest");
+        }
         
         return base.Start();
     }
