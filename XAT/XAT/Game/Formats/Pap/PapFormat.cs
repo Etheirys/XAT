@@ -56,7 +56,7 @@ public class PapFormat
         for (int i = 0; i < numAnims; i++)
         {
             timelineList.Add(new TmbFormat(reader));
-            var requiredPadding = AlignBoundary(reader.BaseStream.Position, i, numAnims);
+            var requiredPadding = AlignBoundary(reader.BaseStream.Position - timelineOffset, i, numAnims);
             _ = reader.ReadBytes(requiredPadding);
         }
 
@@ -109,7 +109,7 @@ public class PapFormat
         {
             var timeline = Animations[i].Timeline;
             timeline.Serialize(writer);
-            var requiredPadding = AlignBoundary(writer.BaseStream.Position, i, Animations.Count);
+            var requiredPadding = AlignBoundary(writer.BaseStream.Position - timelineOffset, i, Animations.Count);
             writer.Write(new byte[requiredPadding]);
         }
 
