@@ -38,6 +38,7 @@ public static class TmbUtils
         { C107Format.MAGIC, typeof(C107Format) },
         { C118Format.MAGIC, typeof(C118Format) },
         { C120Format.MAGIC, typeof(C120Format) },
+        { C124Format.MAGIC, typeof(C124Format) },
         { C125Format.MAGIC, typeof(C125Format) },
         { C131Format.MAGIC, typeof(C131Format) },
         { C173Format.MAGIC, typeof(C173Format) },
