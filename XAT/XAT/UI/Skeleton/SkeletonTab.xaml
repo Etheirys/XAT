@@ -36,7 +36,7 @@
 
         <StackPanel Grid.Column="2">
             <GroupBox Header="Properties">
-                <StackPanel>
+                <StackPanel IsEnabled="{Binding Skeleton, Converter={StaticResource NotNullToBoolConverter}}">
                     <TextBox Text="{Binding Skeleton.Skeleton}" materialDesign:HintAssist.Hint="Skeleton Id" materialDesign:HintAssist.HelperText="The root skeleton." />
 
                     <Separator Opacity="0" Height="20"/>
