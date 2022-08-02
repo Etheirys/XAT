@@ -43,6 +43,9 @@
 
             <TabItem Header="Advanced">
                 <StackPanel>
+                    <TextBox Text="{Binding Animation.Container.Skeleton}" materialDesign:HintAssist.Hint="Skeleton Id" materialDesign:HintAssist.HelperText="The skeleton this PAP is bound to." />
+
+                    <Separator Opacity="0" Height="20"/>
                     <TextBox Text="{Binding Animation.Data.Name}" materialDesign:HintAssist.Hint="Animation Name" materialDesign:HintAssist.HelperText="The name of this animation." />
 
                     <Separator Opacity="0" Height="20"/>

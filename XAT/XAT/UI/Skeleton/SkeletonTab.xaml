@@ -35,6 +35,36 @@
         </GroupBox>
 
         <StackPanel Grid.Column="2">
+            <GroupBox Header="Properties">
+                <StackPanel>
+                    <TextBox Text="{Binding Skeleton.Skeleton}" materialDesign:HintAssist.Hint="Skeleton Id" materialDesign:HintAssist.HelperText="The root skeleton." />
+
+                    <Separator Opacity="0" Height="20"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" Text="{Binding Skeleton.ParentSkeletons[0]}" materialDesign:HintAssist.Hint="Parent 1" materialDesign:HintAssist.HelperText="Parent skeleton 1." />
+
+                        <TextBox Grid.Column="2" Text="{Binding Skeleton.ParentSkeletons[1]}" materialDesign:HintAssist.Hint="Parent 2" materialDesign:HintAssist.HelperText="Parent skeleton 2." />
+
+                        <TextBox Grid.Column="4" Text="{Binding Skeleton.ParentSkeletons[2]}" materialDesign:HintAssist.Hint="Parent 3" materialDesign:HintAssist.HelperText="Parent skeleton 3." />
+
+                        <TextBox Grid.Column="6" Text="{Binding Skeleton.ParentSkeletons[3]}" materialDesign:HintAssist.Hint="Parent 4" materialDesign:HintAssist.HelperText="Parent skeleton 4." />
+                    </Grid>
+                    <Separator Opacity="0" Height="20"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Separator Opacity="0" Height="10" />
+
             <GroupBox Header="Import">
                 <local:SkeletonImportView Skeleton="{Binding Skeleton}" />
             </GroupBox>
