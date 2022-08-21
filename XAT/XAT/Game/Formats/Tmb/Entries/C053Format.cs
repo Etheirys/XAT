@@ -20,10 +20,10 @@ public class C053Format : TmbEntry
     public int Unk2 { get; set; } = 0;
 
     [UserType]
-    public int Unk3 { get; set; } = 0;
+    public short Unk3 { get; set; } = 0;
 
     [UserType]
-    public int Unk4 { get; set; } = 0;
+    public short Unk4 { get; set; } = 0;
 
     [UserType]
     public int Unk5 { get; set; } = 0;
@@ -39,8 +39,8 @@ public class C053Format : TmbEntry
 
         Unk1 = context.Reader.ReadInt32();
         Unk2 = context.Reader.ReadInt32();
-        Unk3 = context.Reader.ReadInt32();
-        Unk4 = context.Reader.ReadInt32();
+        Unk3 = context.Reader.ReadInt16();
+        Unk4 = context.Reader.ReadInt16();
         Unk5 = context.Reader.ReadInt32();
     }
 
