@@ -33,6 +33,7 @@ public static class TmbUtils
         { C063Format.MAGIC, typeof(C063Format) },
         { C067Format.MAGIC, typeof(C067Format) },
         { C075Format.MAGIC, typeof(C075Format) },
+        { C088Format.MAGIC, typeof(C088Format) },
         { C093Format.MAGIC, typeof(C093Format) },
         { C094Format.MAGIC, typeof(C094Format) },
         { C107Format.MAGIC, typeof(C107Format) },
