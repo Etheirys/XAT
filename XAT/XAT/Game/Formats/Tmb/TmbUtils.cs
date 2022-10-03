@@ -16,6 +16,7 @@ public static class TmbUtils
         { TmalFormat.MAGIC, typeof(TmalFormat) },
         { TmacFormat.MAGIC, typeof(TmacFormat) },
         { TmtrFormat.MAGIC, typeof(TmtrFormat) },
+        { TmfcFormat.MAGIC, typeof(TmfcFormat) },
 
         // Entry Types
         { C002Format.MAGIC, typeof(C002Format) },
@@ -24,6 +25,7 @@ public static class TmbUtils
         { C010Format.MAGIC, typeof(C010Format) },
         { C011Format.MAGIC, typeof(C011Format) },
         { C012Format.MAGIC, typeof(C012Format) },
+        { C013Format.MAGIC, typeof(C013Format) },
         { C014Format.MAGIC, typeof(C014Format) },
         { C015Format.MAGIC, typeof(C015Format) },
         { C031Format.MAGIC, typeof(C031Format) },

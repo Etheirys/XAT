@@ -113,6 +113,10 @@
                                 <Separator />
                                 <CheckBox IsChecked="{Binding Timeline.HasFaceLibrary}" Margin="10, 10, 10, 10">Enable Face Library</CheckBox>
                                 <inspector:InspectorView Target="{Binding Timeline.FaceLibrary}" Visibility="{Binding Timeline.FaceLibrary, Converter={StaticResource NotNullToVisibilityConverter}}" Margin="10" />
+
+                                <Separator />
+                                <CheckBox IsChecked="{Binding Timeline.HasTmfc}" Margin="10, 10, 10, 10">Enable TMFC</CheckBox>
+                                <inspector:InspectorView Target="{Binding Timeline.TmfcEntry}" Visibility="{Binding Timeline.TmfcEntry, Converter={StaticResource NotNullToVisibilityConverter}}" Margin="10" />
                             </StackPanel>
                         </Expander>
 

@@ -31,6 +31,25 @@ public class TmbFormat
         }
     }
     public TmppFormat? FaceLibrary { get; set; }
+
+    [DependsOn(nameof(TmfcEntry))]
+    public bool HasTmfc
+    {
+        get => TmfcEntry != null;
+        set
+        {
+            if (value && TmfcEntry == null)
+            {
+                TmfcEntry = new TmfcFormat();
+            }
+            else if (!value && TmfcEntry != null)
+            {
+                TmfcEntry = null;
+            }
+        }
+    }
+    public TmfcFormat? TmfcEntry { get; set; }
+
     public TmalFormat ActorList { get; set; }
 
     public TmbFormat(BinaryReader reader)
@@ -89,6 +108,15 @@ public class TmbFormat
         {
             throw new Exception("Expected entry to be TMAL");
         }
+
+        foreach(var item in items)
+        {
+            // Tmfc
+            if (item is TmfcFormat tmfc)
+            {
+                TmfcEntry = tmfc;
+            }
+        }
     }
     public void Serialize(BinaryWriter writer)
     {
@@ -146,6 +174,9 @@ public class TmbFormat
                 }
             }
         }
+
+        if (TmfcEntry != null)
+            items.Add(TmfcEntry);
 
         int itemLength = items.Sum(x => x.Size);
         int extraLength = items.Sum(x => x.ExtraSize);
