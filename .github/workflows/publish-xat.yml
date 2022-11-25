@@ -68,7 +68,7 @@ jobs:
 
     - name: Write out repo.json
       run: |
-        $ver = v${{ steps.version-date.outputs.formattedTime }}
+        $ver = '${{ steps.version-date.outputs.formattedTime }}'
         $path = './base_repo.json'
         $new_path = './repo.json'
         $content = get-content -path $path
