@@ -70,21 +70,21 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Write out repo.json
-        run: |
-          $ver = v${{ steps.version-date.outputs.formattedTime }}
-          $path = './base_repo.json'
-          $new_path = './repo.json'
-          $content = get-content -path $path
-          $content = $content -replace '1.0.0.0',$ver
-          set-content -Path $new_path -Value $content
+      run: |
+        $ver = v${{ steps.version-date.outputs.formattedTime }}
+        $path = './base_repo.json'
+        $new_path = './repo.json'
+        $content = get-content -path $path
+        $content = $content -replace '1.0.0.0',$ver
+        set-content -Path $new_path -Value $content
 
     - name: Commit repo.json
-        run: |
-          git config --global user.name "Actions User"
-          git config --global user.email "actions@github.com"
-          git fetch origin master && git fetch origin test && git checkout master
-          git add repo.json
-          git commit -m "[CI] Updating repo.json for ${{ github.ref }}" || true
-          git push origin master || true
-          git branch -f test origin/master && git checkout test
-          git push origin test -f || true
+      run: |
+        git config --global user.name "Actions User"
+        git config --global user.email "actions@github.com"
+        git fetch origin master && git fetch origin test && git checkout master
+        git add repo.json
+        git commit -m "[CI] Updating repo.json for ${{ github.ref }}" || true
+        git push origin master || true
+        git branch -f test origin/master && git checkout test
+        git push origin test -f || true
