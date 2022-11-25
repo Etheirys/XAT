@@ -24,3 +24,4 @@ This project builds on the work of previous research and tools built for XIV. A 
 * [BlenderAssist](https://github.com/0ceal0t/BlenderAssist/)
 * [Anamnesis](https://github.com/imchillin/Anamnesis)
 * [VFXEditor](https://github.com/0ceal0t/Dalamud-VFXEditor)
+* [Penumbra](https://github.com/xivdev/Penumbra/)
