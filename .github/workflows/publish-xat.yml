@@ -39,7 +39,7 @@ jobs:
     - name: Zip Standalone Release
       uses: TheDoctor0/zip-release@0.6.0
       with:
-        filename: '../XAT-Standaline.zip'
+        filename: '../XAT-Standalone.zip'
         directory: './publish-standalone/'
         exclusions: '*.pdb* *.xml*'
 
@@ -60,10 +60,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
-        artifacts: 
-          - "XAT-Standalone.zip"
-          - "XAT-Blender-Addon.zip"
-          - "XAT-Dalamud-Plugin.zip"
+        artifacts: "XAT-Standalone.zip,XAT-Blender-Addon.zip,XAT-Dalamud-Plugin.zip"
         name: ${{ steps.version-date.outputs.formattedTime }}
         tag: v${{ steps.version-date.outputs.formattedTime }}
         draft: true
