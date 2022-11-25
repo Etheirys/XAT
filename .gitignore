@@ -1,8 +1,10 @@
 publish/
 \.vs/
 \.idea/
+.vscode/
 TestResults/
 packages/
+__pycache__/
 *.user
 bin/
 obj/
