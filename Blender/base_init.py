@@ -2,7 +2,7 @@ bl_info = {
 	"name" : "XAT",
 	"author" : "Asgard",
 	"description" : "Animations for FFXIV",
-	"version": (0,0,1),
+	"version": (1,0,0,0),
 	"blender" : (3, 0, 0),
 	"location" : "3D View > Tools (Right Side) > XAT",
 	"warning" : "",
@@ -11,10 +11,10 @@ bl_info = {
     "tracker_url": 'https://github.com/AsgardXIV/XAT',
 }
 
-from .camera import camera
+from .xat import xat
 
 def register():
-	camera.register()
+	xat.register()
 
 def unregister():
-    camera.unregister()
+    xat.unregister()
