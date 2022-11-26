@@ -19,7 +19,7 @@ public unsafe class CameraHooks : IDisposable
     private static Hook<GetCameraPositionDelegate>? GetCameraPositionHook;
 
     public delegate void SetCameraLookAtDelegate(GameCamera* camera, float* lookAtPosition, float* cameraPosition, float* a4);
-    public static Hook<SetCameraLookAtDelegate> SetCameraLookAtHook;
+    public static Hook<SetCameraLookAtDelegate>? SetCameraLookAtHook;
 
     public CameraHooks(XATPlugin plugin)
     {
@@ -73,7 +73,7 @@ public unsafe class CameraHooks : IDisposable
     private void SetCameraLookAtDetour(GameCamera* camera, float* lookAtPosition, float* cameraPosition, float* a4)
     {
         if (!Plugin.CutsceneManager.IsRunning)
-            SetCameraLookAtHook.Original(camera, lookAtPosition, cameraPosition, a4);
+            SetCameraLookAtHook?.Original(camera, lookAtPosition, cameraPosition, a4);
     }
 
     public void Dispose()
