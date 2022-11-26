@@ -1,11 +1,7 @@
 ﻿using Dalamud.Interface.Colors;
 using Dalamud.Interface.ImGuiFileDialog;
-using FFXIVClientStructs.FFXIV.Client.UI;
 using ImGuiNET;
-using System.Drawing;
 using System.IO;
-using System.Numerics;
-using System.Reflection.Emit;
 using XAT.Plugin.Files;
 
 namespace XAT.Plugin.UI;

@@ -1,11 +1,6 @@
 ﻿using Dalamud.Hooking;
-using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using System;
-using System.Diagnostics;
-using System.Numerics;
-using XAT.Plugin.Cutscene;
 using XAT.Plugin.Game.Structs;
-using XAT.Plugin.Utils;
 
 namespace XAT.Plugin.Game.Hooks;
 

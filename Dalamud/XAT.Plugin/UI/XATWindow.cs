@@ -1,5 +1,4 @@
-﻿using Dalamud.Interface.ImGuiFileDialog;
-using Dalamud.Interface.Windowing;
+﻿using Dalamud.Interface.Windowing;
 using ImGuiNET;
 using System;
 using System.Numerics;

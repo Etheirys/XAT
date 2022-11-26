@@ -1,15 +1,11 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using ImGuiNET;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Numerics;
 using XAT.Plugin.Files;
 using XAT.Plugin.Game.Structs;
-using XAT.Plugin.UI;
 using XAT.Plugin.Utils;
-using static Lumina.Data.Parsing.Layer.LayerCommon;
 
 namespace XAT.Plugin.Cutscene;
 
