@@ -53,7 +53,7 @@ jobs:
     - name: Write out Blender version
       run: |
         $ver = '${{ steps.version-date.outputs.formattedTime }}'
-        $ver = $ver -replace '.',','
+        $ver = $ver -replace '\.',','
         $path = './Blender/base_init.py'
         $new_path = './Blender/__init__.py'
         $content = get-content -path $path
