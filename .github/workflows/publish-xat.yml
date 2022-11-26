@@ -35,7 +35,15 @@ jobs:
 
     - name: Deploy XAT Dalamud
       run: dotnet publish Dalamud/XAT.Plugin.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish /p:Version=${{ steps.version-date.outputs.formattedTime }}
-      
+
+    - name: Write version into Dalamud json
+      run: |
+        $ver = '${{ steps.version-date.outputs.formattedTime }}'
+        $path = './publish-dalamud/XAT.Plugin.json'
+        $content = get-content -path $path
+        $content = $content -replace '1.0.0.0',$ver
+        set-content -Path $path -Value $content
+
     - name: Zip Standalone Release
       uses: TheDoctor0/zip-release@0.6.0
       with:

@@ -47,4 +47,10 @@
 		</Reference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="XAT.Plugin.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

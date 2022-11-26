@@ -1,8 +1,9 @@
 ﻿{
   "Author": "Asgard",
   "Name": "XAT",
-  "Punchline": "Create and edit animations and cutsenes.",
-  "Description": "Create and edit animations and cutsenes.",
+  "Punchline": "Create and edit animations and cutscenes.",
+  "Description": "Create and edit animations and cutscenes.",
+  "AssemblyVersion": "1.0.0.0",
   "InternalName": "xatPlugin",
   "ApplicableVersion": "any",
   "Tags": [
