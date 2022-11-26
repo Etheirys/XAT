@@ -11,7 +11,7 @@ bl_info = {
     "tracker_url": 'https://github.com/AsgardXIV/XAT',
 }
 
-from .xat import xat
+import xat
 
 def register():
 	xat.register()
