@@ -54,8 +54,8 @@ jobs:
       run: |
         $ver = '${{ steps.version-date.outputs.formattedTime }}'
         $ver = $ver -replace '\.',','
-        $path = './Blender/base_init.py'
-        $new_path = './Blender/__init__.py'
+        $path = './Blender/xat_addon/base_init.tmpl'
+        $new_path = './Blender/xat_addon/__init__.py'
         $content = get-content -path $path
         $content = $content -replace '1,0,0,0',$ver
         set-content -Path $new_path -Value $content
@@ -91,6 +91,6 @@ jobs:
         git config --global user.email "actions@github.com"
         git fetch origin main && git fetch origin test && git checkout main
         git add repo.json
-        git add Blender/__init__.py
+        git add Blender/xat_addon/__init__.py
         git commit -m "[CI] Updating versions for ${{ steps.version-date.outputs.formattedTime }}" || true
         git push origin main || true
