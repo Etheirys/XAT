@@ -16,9 +16,9 @@
         "LoadPriority": 69420,
         "LoadRequiredState": 2,
         "LoadSync": true,
-        "DownloadLinkInstall": "https://github.com/AsgardXIV/XAT/releases/tag/v1.0.0.0/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkTesting": "https://github.com/AsgardXIV/XAT/releases/tag/v1.0.0.0/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkUpdate": "https://github.com/AsgardXIV/XAT/releases/tag/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkInstall": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkTesting": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkUpdate": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
         "IconUrl": "https://raw.githubusercontent.com/AsgardXIV/XAT/master/Resources/Images/XATIcon.png"
     }
 ]
