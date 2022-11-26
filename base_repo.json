@@ -3,7 +3,7 @@
         "Author": "Asgard",
         "Name": "XAT",
         "Description": "Create and edit animations and cutscenes",
-        "InternalName": "xatPlugin",
+        "InternalName": "XAT.Plugin",
         "AssemblyVersion": "1.0.0.0",
         "TestingAssemblyVersion": "1.0.0.0",
         "RepoUrl": "https://github.com/AsgardXIV/XAT",

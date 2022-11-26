@@ -4,7 +4,7 @@
   "Punchline": "Create and edit animations and cutscenes.",
   "Description": "Create and edit animations and cutscenes.",
   "AssemblyVersion": "1.0.0.0",
-  "InternalName": "xatPlugin",
+  "InternalName": "XAT.Plugin",
   "ApplicableVersion": "any",
   "Tags": [
     "animation",

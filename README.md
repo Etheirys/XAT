@@ -25,3 +25,4 @@ This project builds on the work of previous research and tools built for XIV. A 
 * [Anamnesis](https://github.com/imchillin/Anamnesis)
 * [VFXEditor](https://github.com/0ceal0t/Dalamud-VFXEditor)
 * [Penumbra](https://github.com/xivdev/Penumbra/)
+* [Cammy](https://github.com/UnknownX7/Cammy/)
