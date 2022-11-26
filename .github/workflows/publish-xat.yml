@@ -54,8 +54,8 @@ jobs:
       run: |
         $ver = '${{ steps.version-date.outputs.formattedTime }}'
         $ver = $ver -replace '.',','
-        $path = './Blender/base_init.json'
-        $new_path = './Blender/__init__.json'
+        $path = './Blender/base_init.py'
+        $new_path = './Blender/__init__.py'
         $content = get-content -path $path
         $content = $content -replace '1,0,0,0',$ver
         set-content -Path $new_path -Value $content
