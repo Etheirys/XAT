@@ -2,7 +2,7 @@ bl_info = {
 	"name" : "XAT",
 	"author" : "Asgard",
 	"description" : "Animations for FFXIV",
-	"version": (2022,11,26,2428),
+	"version": (1,0,0,0),
 	"blender" : (3, 0, 0),
 	"location" : "3D View > Tools (Right Side) > XAT",
 	"warning" : "",
@@ -11,7 +11,7 @@ bl_info = {
     "tracker_url": 'https://github.com/AsgardXIV/XAT',
 }
 
-import xat
+from . import xat
 
 def register():
 	xat.register()
