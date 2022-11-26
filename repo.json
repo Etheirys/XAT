@@ -4,8 +4,8 @@
         "Name": "XAT",
         "Description": "Create and edit animations and cutscenes",
         "InternalName": "xatPlugin",
-        "AssemblyVersion": "2022.11.26.2428",
-        "TestingAssemblyVersion": "2022.11.26.2428",
+        "AssemblyVersion": "2022.11.26.2445",
+        "TestingAssemblyVersion": "2022.11.26.2445",
         "RepoUrl": "https://github.com/AsgardXIV/XAT",
         "ApplicableVersion": "any",
         "DalamudApiLevel": 7,
@@ -16,9 +16,9 @@
         "LoadPriority": 69420,
         "LoadRequiredState": 2,
         "LoadSync": true,
-        "DownloadLinkInstall": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2428/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkTesting": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2428/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkUpdate": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2428/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkInstall": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2445/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkTesting": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2445/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkUpdate": "https://github.com/AsgardXIV/XAT/releases/tag/v2022.11.26.2445/XAT-Dalamud-Plugin.zip",
         "IconUrl": "https://raw.githubusercontent.com/AsgardXIV/XAT/master/Resources/Images/XATIcon.png"
     }
 ]
