@@ -45,6 +45,7 @@ public static class TmbUtils
         { C124Format.MAGIC, typeof(C124Format) },
         { C125Format.MAGIC, typeof(C125Format) },
         { C131Format.MAGIC, typeof(C131Format) },
+        { C136Format.MAGIC, typeof(C136Format) },
         { C173Format.MAGIC, typeof(C173Format) },
         { C174Format.MAGIC, typeof(C174Format) },
         { C175Format.MAGIC, typeof(C175Format) },
