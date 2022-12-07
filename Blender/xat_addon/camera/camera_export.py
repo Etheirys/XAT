@@ -44,7 +44,7 @@ def export(context: Context, camera: Object, out_filepath):
         f = CameraFrame()
         f.translation = cur.to_translation()
         f.rotation = cur.to_quaternion()
-        f.fov = camera.data.angle
+        f.fov = camera.data.angle_y
 
         key_frames.append(f)
 
