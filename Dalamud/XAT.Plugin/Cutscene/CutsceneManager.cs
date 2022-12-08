@@ -20,11 +20,6 @@ public class CutsceneManager : IDisposable
     public CameraState? CameraState { get; private set; }
     public GameCamera RestoreCameraState { get; private set; }
 
-
-    public Vector3 LookAtPosition { get; private set; }
-    public Quaternion LookAtRotation { get; private set; }
-    public float FoV { get; private set; }
-
     private XATPlugin Plugin { get; }
 
     public bool IsRunning => Stopwatch.IsRunning;
