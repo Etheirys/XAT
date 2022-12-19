@@ -37,6 +37,8 @@ public class XATPlugin : IDalamudPlugin
 
     public CameraHooks CameraHooks { get; }
 
+    public VirtualCamera VirtualCamera { get; }
+
     public XATWindow Window { get; }
 
     public WindowSystem WindowSystem { get; }
@@ -50,6 +52,7 @@ public class XATPlugin : IDalamudPlugin
         this.PluginInterface = pluginInterface;
         this.PluginInterface.Inject(this);
         this.GPoseService= new(this);
+        this.VirtualCamera = new();
         this.CameraHooks = new(this);
 
         this.CutsceneManager= new(this);

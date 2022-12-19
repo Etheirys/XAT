@@ -12,13 +12,13 @@ public class CutsceneManager : IDisposable
 {
     private const double FRAME_STEP = 33.33333333333333;
 
+    private XATPlugin Plugin { get; }
+
     public XATCameraPathFile? CameraPath { get; set; }
 
     public CameraSettings CameraSettings { get; } = new();
 
-    public CameraState? CameraState { get; private set; }
-
-    private XATPlugin Plugin { get; }
+    public VirtualCamera VirtualCamera => Plugin.VirtualCamera;
 
     public bool IsRunning => Stopwatch.IsRunning;
     private Stopwatch Stopwatch = new();
@@ -56,6 +56,8 @@ public class CutsceneManager : IDisposable
 
         Stopwatch.Reset();
         Stopwatch.Start();
+        this.VirtualCamera.IsActive = true;
+
     }
 
     public void StopPlayback()
@@ -63,6 +65,7 @@ public class CutsceneManager : IDisposable
         if (IsRunning)
         {
             Stopwatch.Reset();
+            this.VirtualCamera.IsActive = false;
         }
 
     }
@@ -120,7 +123,7 @@ public class CutsceneManager : IDisposable
         Quaternion finalRotation = BaseRotation * rawRotation;
 
 
-        CameraState = new CameraState
+        this.VirtualCamera.State = new VirtualCamera.CameraState
         (
             Position: finalPosition,
             Rotation: finalRotation,

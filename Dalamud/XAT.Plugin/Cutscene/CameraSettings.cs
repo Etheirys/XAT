@@ -2,7 +2,6 @@
 
 namespace XAT.Plugin.Cutscene;
 
-public record class CameraState(Vector3 Position, Quaternion Rotation, float FoV);
 public class CameraSettings
 {
     public Vector3 Scale = Vector3.One;

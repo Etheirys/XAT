@@ -1,6 +1,7 @@
 ﻿using Dalamud.Hooking;
 using System;
 using System.Numerics;
+using XAT.Plugin.Cutscene;
 using XAT.Plugin.Utils;
 
 namespace XAT.Plugin.Game.Hooks;
@@ -8,6 +9,7 @@ namespace XAT.Plugin.Game.Hooks;
 public unsafe class CameraHooks : IDisposable
 {
     private XATPlugin Plugin { get; }
+    private VirtualCamera VirtualCamera => Plugin.VirtualCamera;
 
     private delegate Matrix4x4* MakeProjectionMatrix2(IntPtr ptr, float fov, float aspect, float nearPlane, float farPlane, float a6, float a7);
     private static Hook<MakeProjectionMatrix2> ProjectionHook = null!;
@@ -31,20 +33,10 @@ public unsafe class CameraHooks : IDisposable
 
     private unsafe Matrix4x4* ProjectionDetour(IntPtr ptr, float fov, float aspect, float nearPlane, float farPlane, float a6, float a7)
     {
+        if (VirtualCamera.IsActive)
+            fov = VirtualCamera.State.FoV ?? fov;
+
         var exec = ProjectionHook.Original(ptr, fov, aspect, nearPlane, farPlane, a6, a7);
-
-        if (!Plugin.CutsceneManager.IsRunning)
-        {
-            return exec;
-        }
-
-        var cameraState = Plugin.CutsceneManager.CameraState;
-        if (cameraState == null)
-        {
-            return exec;
-        }
-
-        exec = ProjectionHook.Original(ptr, cameraState.FoV, aspect, nearPlane, farPlane, a6, a7);
 
         return exec;
     }
@@ -53,23 +45,16 @@ public unsafe class CameraHooks : IDisposable
     {
         var exec = ViewHook.Original(a1);
 
-        if (!Plugin.CutsceneManager.IsRunning)
-        {
+        if (!VirtualCamera.IsActive)
             return exec;
-        }
 
-        var cameraState = Plugin.CutsceneManager.CameraState;
-        if (cameraState == null)
-        {
-            return exec;
-        }
-
+        var cameraState = VirtualCamera.State;
         var rotMat = Matrix4x4.CreateFromQuaternion(cameraState.Rotation);
         Matrix4x4.Invert(rotMat, out Matrix4x4 invRotMat);
-        var tranMat = Matrix4x4.CreateTranslation(-cameraState.Position);
-        var finalMat = tranMat * invRotMat;
+        var transMat = Matrix4x4.CreateTranslation(-cameraState.Position);
+        var finalMat = transMat * invRotMat;
 
-        * exec = finalMat;
+        *exec = finalMat;
 
         return exec;
     }
