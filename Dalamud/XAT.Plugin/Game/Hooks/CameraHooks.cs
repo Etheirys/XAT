@@ -31,22 +31,22 @@ public unsafe class CameraHooks : IDisposable
 
     private unsafe Matrix4x4* ProjectionDetour(IntPtr ptr, float fov, float aspect, float nearPlane, float farPlane, float a6, float a7)
     {
-        var original = ProjectionHook.Original(ptr, fov, aspect, nearPlane, farPlane, a6, a7);
+        var exec = ProjectionHook.Original(ptr, fov, aspect, nearPlane, farPlane, a6, a7);
 
         if (!Plugin.CutsceneManager.IsRunning)
         {
-            return original;
+            return exec;
         }
 
         var cameraState = Plugin.CutsceneManager.CameraState;
         if (cameraState == null)
         {
-            return original;
+            return exec;
         }
 
-        *original = Matrix4x4.CreatePerspectiveFieldOfView(cameraState.FoV, aspect, nearPlane, farPlane);
+        exec = ProjectionHook.Original(ptr, cameraState.FoV, aspect, nearPlane, farPlane, a6, a7);
 
-        return original;
+        return exec;
     }
 
     private unsafe Matrix4x4* ViewMatrixDetour(IntPtr a1)
