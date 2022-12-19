@@ -54,7 +54,6 @@ public class CutsceneTab
 
         ImGui.InputFloat3("Scale", ref Plugin.CutsceneManager.CameraSettings.Scale);
         ImGui.InputFloat3("Offset", ref Plugin.CutsceneManager.CameraSettings.Offset);
-        ImGui.InputFloat("Zoom", ref Plugin.CutsceneManager.CameraSettings.Zoom);
         ImGui.Checkbox("Loop", ref Plugin.CutsceneManager.CameraSettings.Loop);
 
         ImGui.Separator();
@@ -66,17 +65,15 @@ public class CutsceneTab
         if (!Plugin.GPoseService.IsInGPose) ImGui.BeginDisabled();
         if (!Plugin.GPoseService.IsInGPose) ImGui.TextColored(ImGuiColors.DPSRed, "Must be in GPose");
 
-            if (Plugin.CutsceneManager.IsRunning) ImGui.BeginDisabled();
+        if (Plugin.CutsceneManager.IsRunning) ImGui.BeginDisabled();
         if (ImGui.Button("Play"))
         {
-            Plugin.CutsceneManager.StartPlayback();
-
-            if(closeWindowOnPlay)
-                Plugin.Window.IsOpen = false;
+            Play();
         }
-        if (Plugin.CutsceneManager.IsRunning) ImGui.EndDisabled();
 
         ImGui.SameLine();
+
+        if (Plugin.CutsceneManager.IsRunning) ImGui.EndDisabled();
 
         if (!Plugin.CutsceneManager.IsRunning) ImGui.BeginDisabled();
         if (ImGui.Button("Stop"))
@@ -90,5 +87,13 @@ public class CutsceneTab
         if (!Plugin.GPoseService.IsInGPose) ImGui.EndDisabled();
 
         this.FileDialogManager.Draw();
+    }
+
+    private void Play()
+    {
+        Plugin.CutsceneManager.StartPlayback();
+
+        if (closeWindowOnPlay)
+            Plugin.Window.IsOpen = false;
     }
 }

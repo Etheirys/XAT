@@ -4,7 +4,6 @@ using System;
 using System.Diagnostics;
 using System.Numerics;
 using XAT.Plugin.Files;
-using XAT.Plugin.Game.Structs;
 using XAT.Plugin.Utils;
 
 namespace XAT.Plugin.Cutscene;
@@ -18,7 +17,6 @@ public class CutsceneManager : IDisposable
     public CameraSettings CameraSettings { get; } = new();
 
     public CameraState? CameraState { get; private set; }
-    public GameCamera RestoreCameraState { get; private set; }
 
     private XATPlugin Plugin { get; }
 
@@ -53,19 +51,6 @@ public class CutsceneManager : IDisposable
 
             BasePosition = new Vector3(gameObject->DrawObject->Object.Position.X, gameObject->DrawObject->Object.Position.Y, gameObject->DrawObject->Object.Position.Z);
             BaseRotation = new Quaternion(gameObject->DrawObject->Object.Rotation.X, gameObject->DrawObject->Object.Rotation.Y, gameObject->DrawObject->Object.Rotation.Z, gameObject->DrawObject->Object.Rotation.W);
-
-            GameCamera* camera = Plugin.CameraHooks.CameraManager->WorldCamera;
-            RestoreCameraState = *camera;
-
-            camera->MinZoom = 0f;
-            camera->MaxZoom = 1000f;
-            camera->MinFoV = -100f;
-            camera->MaxFoV = 100f;
-
-            camera->MaxVRotation = 100f;
-            camera->MinVRotation = -100f;
-            camera->MinZoom = 100f;
-            camera->MinVRotation = -100f;
         }
        
 
@@ -78,12 +63,6 @@ public class CutsceneManager : IDisposable
         if (IsRunning)
         {
             Stopwatch.Reset();
-
-            unsafe
-            {
-                GameCamera* camera = Plugin.CameraHooks.CameraManager->WorldCamera;
-                *camera = RestoreCameraState;
-            }
         }
 
     }
@@ -136,17 +115,16 @@ public class CutsceneManager : IDisposable
         Vector3 rawPosition = (Vector3.Lerp(previousKey.Position, nextKey.Position, frameProgress) * CameraSettings.Scale) + CameraSettings.Offset;
         Quaternion rawRotation = Quaternion.Lerp(previousKey.Rotation, nextKey.Rotation, frameProgress);
         float rawFoV = previousKey.FoV + (nextKey.FoV - previousKey.FoV) * frameProgress;
-        float rawZoom = CameraSettings.Zoom;
 
         Vector3 finalPosition = BasePosition + BaseRotation.RotatePosition(rawPosition);
         Quaternion finalRotation = BaseRotation * rawRotation;
 
+
         CameraState = new CameraState
         (
             Position: finalPosition,
-            Rotation: finalRotation.ToYawPitchRoll(),
-            FoV: rawFoV,
-            Zoom: rawZoom
+            Rotation: finalRotation,
+            FoV: rawFoV
         );
 
     }

@@ -5,15 +5,6 @@ namespace XAT.Plugin.Utils;
 
 public static class QuaternionExtensions
 {
-    public static Vector3 ToYawPitchRoll(this Quaternion r)
-    {
-        float yaw = MathF.Atan2(2.0f * (r.Y * r.W + r.X * r.Z), 1.0f - 2.0f * (r.X * r.X + r.Y * r.Y));
-        float pitch = MathF.Asin(2.0f * (r.X * r.W - r.Y * r.Z));
-        float roll = MathF.Atan2(2.0f * (r.X * r.Y + r.Z * r.W), 1.0f - 2.0f * (r.X * r.X + r.Z * r.Z));
-
-        return new Vector3(yaw, pitch, roll);
-    }
-
     public static Vector3 RotatePosition(this Quaternion left, Vector3 right)
     {
         float num = left.X * 2f;
