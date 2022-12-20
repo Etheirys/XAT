@@ -34,7 +34,7 @@ public unsafe class CameraHooks : IDisposable
     private unsafe Matrix4x4* ProjectionDetour(IntPtr ptr, float fov, float aspect, float nearPlane, float farPlane, float a6, float a7)
     {
         if (VirtualCamera.IsActive)
-            fov = VirtualCamera.State.FoV ?? fov;
+            fov = VirtualCamera.State.FoV;
 
         var exec = ProjectionHook.Original(ptr, fov, aspect, nearPlane, farPlane, a6, a7);
 
