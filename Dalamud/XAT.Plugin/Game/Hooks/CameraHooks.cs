@@ -49,12 +49,8 @@ public unsafe class CameraHooks : IDisposable
             return exec;
 
         var cameraState = VirtualCamera.State;
-        var rotMat = Matrix4x4.CreateFromQuaternion(cameraState.Rotation);
-        Matrix4x4.Invert(rotMat, out Matrix4x4 invRotMat);
-        var transMat = Matrix4x4.CreateTranslation(-cameraState.Position);
-        var finalMat = transMat * invRotMat;
 
-        *exec = finalMat;
+        *exec = cameraState.Matrix;
 
         return exec;
     }

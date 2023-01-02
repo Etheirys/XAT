@@ -115,18 +115,30 @@ public class CutsceneManager : IDisposable
         double pastPreviousKey = totalMillis - previousFrameStart;
         float frameProgress = (float)(pastPreviousKey / blendLength);
 
-        Vector3 rawPosition = (Vector3.Lerp(previousKey.Position, nextKey.Position, frameProgress) * CameraSettings.Scale) + CameraSettings.Offset;
-        Quaternion rawRotation = Quaternion.Lerp(previousKey.Rotation, nextKey.Rotation, frameProgress);
+        // First we calculate the raw position/rotation/fov based on the frame progress
+        var rawPosition = Vector3.Lerp(previousKey.Position, nextKey.Position, frameProgress);
+        var rawRotation = Quaternion.Lerp(previousKey.Rotation, nextKey.Rotation, frameProgress);
         float rawFoV = previousKey.FoV + (nextKey.FoV - previousKey.FoV) * frameProgress;
 
-        Vector3 finalPosition = BasePosition + BaseRotation.RotatePosition(rawPosition);
-        Quaternion finalRotation = BaseRotation * rawRotation;
+        // Apply the user adjustmenets for the position 
+        var adjustedPosition = (rawPosition * CameraSettings.Scale) + CameraSettings.Offset; 
 
+        // Now we apply the rotation from the base to the raw values and get a matrix for each
+        Vector3 rotatedLocalPosition = BaseRotation.RotatePosition(adjustedPosition);
+        Quaternion localRotation = BaseRotation * rawRotation;
+        var localRotationMatrix = Matrix4x4.CreateFromQuaternion(localRotation);
+        Matrix4x4.Invert(localRotationMatrix, out Matrix4x4 invertedLocalRotationMatrix);
+        var localTranslationMatrix = Matrix4x4.CreateTranslation(-rotatedLocalPosition);
 
-        this.VirtualCamera.State = new VirtualCamera.CameraState
+        // Create a matrix with the base position
+        var basePositionMatrix = Matrix4x4.CreateTranslation(-BasePosition);      
+
+        // Create the final matrix
+        var finalMat = basePositionMatrix * (localTranslationMatrix * invertedLocalRotationMatrix);
+
+        this.VirtualCamera.State = new
         (
-            Position: finalPosition,
-            Rotation: finalRotation,
+            Matrix: finalMat,
             FoV: rawFoV
         );
 

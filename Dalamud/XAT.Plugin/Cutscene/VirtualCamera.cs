@@ -5,9 +5,9 @@ namespace XAT.Plugin.Cutscene;
 
 public class VirtualCamera
 {
-    public record class CameraState(Vector3 Position, Quaternion Rotation, float FoV);
+    public record class CameraState(Matrix4x4 Matrix, float FoV);
 
     public bool IsActive { get; set; } = false;
 
-    public CameraState State { get; set; } = new CameraState(Vector3.Zero, Quaternion.Identity, 0.78f);
+    public CameraState State { get; set; } = new CameraState(Matrix4x4.Identity, 0.78f);
 }
