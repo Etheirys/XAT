@@ -23,7 +23,7 @@ jobs:
     - name: Install .NET
       uses: actions/setup-dotnet@v1.8.2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
    
     - name: Deploy XAT
       run: dotnet publish XAT/XAT.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish /p:Version=${{ steps.version-date.outputs.formattedTime }}
