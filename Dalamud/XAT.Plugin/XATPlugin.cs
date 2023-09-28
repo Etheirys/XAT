@@ -4,6 +4,7 @@ using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
+using Dalamud.Plugin.Services;
 using XAT.Plugin.Cutscene;
 using XAT.Plugin.Game;
 using XAT.Plugin.Game.Hooks;
@@ -19,19 +20,26 @@ public class XATPlugin : IDalamudPlugin
     private const string CommandName = "/xat";
 
     [PluginService]
-    public CommandManager CommandManager { get; init; } = null!;
+    public ICommandManager CommandManager { get; init; } = null!;
 
     [PluginService]
-    public Framework Framework { get; init; } = null!;
+    public IFramework Framework { get; init; } = null!;
 
     [PluginService]
-    public SigScanner SigScanner { get; init; } = null!;
+    public ISigScanner SigScanner { get; init; } = null!;
 
     [PluginService]
-    public ObjectTable ObjectTable { get; init; } = null!;
+    public IObjectTable ObjectTable { get; init; } = null!;
 
     [PluginService]
-    public TargetManager TargetManager { get; init; } = null!;
+    public ITargetManager TargetManager { get; init; } = null!;
+
+    [PluginService]
+    public IGameInteropProvider GameInteropProvider { get; init; } = null!;
+
+    [PluginService]
+    public IClientState ClientState { get; init; } = null!;
+
 
     public DalamudPluginInterface PluginInterface { get; }
 
@@ -74,7 +82,7 @@ public class XATPlugin : IDalamudPlugin
 
     private void OnCommand(string command, string args)
     {
-        Window? window = WindowSystem.GetWindow(PluginName);
+        Window? window = this.Window;
 
         if (window != null)
         {
@@ -94,7 +102,7 @@ public class XATPlugin : IDalamudPlugin
         this.WindowSystem.Draw();
     }
 
-    private void Update(Framework framework)
+    private void Update(IFramework framework)
     {
         this.GPoseService.Update();
         this.CutsceneManager.Update();
