@@ -22,10 +22,10 @@ public unsafe class CameraHooks : IDisposable
         this.Plugin = plugin;
 
         var proj = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 4C 8B 2D ?? ?? ?? ?? 41 0F 28 C2");
-        ProjectionHook = Hook<MakeProjectionMatrix2>.FromAddress(proj, ProjectionDetour);
+        ProjectionHook = Plugin.GameInteropProvider.HookFromAddress<MakeProjectionMatrix2>(proj, ProjectionDetour);
 
         var view = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 33 C0 48 89 83 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ??");
-        ViewHook = Hook<CalculateViewMatrix>.FromAddress(view, ViewMatrixDetour);
+        ViewHook = Plugin.GameInteropProvider.HookFromAddress<CalculateViewMatrix>(view, ViewMatrixDetour);
 
         ProjectionHook.Enable();
         ViewHook.Enable();

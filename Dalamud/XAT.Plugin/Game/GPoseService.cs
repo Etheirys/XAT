@@ -18,9 +18,9 @@ public class GPoseService
 
     public void Update()
     {
-        bool nextGPoseState = Plugin.PluginInterface.UiBuilder.GposeActive;
+        bool nextGPoseState = Plugin.ClientState.IsGPosing;
 
-        if (IsInGPose != Plugin.PluginInterface.UiBuilder.GposeActive)
+        if (IsInGPose != Plugin.ClientState.IsGPosing)
         {
             IsInGPose= nextGPoseState;
             OnGPoseChange?.Invoke(IsInGPose);
