@@ -1,4 +1,7 @@
-# XAT - The XIV Animation Toolkit
+# OBSOLETE
+XAT is now obsolete, please see [VFX Editor](https://github.com/0ceal0t/Dalamud-VFXEditor) for animations.
+
+## XAT - The XIV Animation Toolkit
 
 XAT (or, more formally titled, The XIV Animation Toolkit) is a standalone tool for manipulating animations and skeletons in Final Fantasy XIV. It provides various techniques to export, import, compress and bind animations to and from a variety of formats.
 
