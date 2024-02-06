@@ -6,7 +6,7 @@
         "InternalName": "XAT.Plugin",
         "AssemblyVersion": "1.0.0.0",
         "TestingAssemblyVersion": "1.0.0.0",
-        "RepoUrl": "https://github.com/AsgardXIV/XAT",
+        "RepoUrl": "https://github.com/Etheirys/XAT",
         "ApplicableVersion": "any",
         "DalamudApiLevel": 9,
         "IsHide": "False",
@@ -16,9 +16,9 @@
         "LoadPriority": 69420,
         "LoadRequiredState": 2,
         "LoadSync": true,
-        "DownloadLinkInstall": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkTesting": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
-        "DownloadLinkUpdate": "https://github.com/AsgardXIV/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
-        "IconUrl": "https://raw.githubusercontent.com/AsgardXIV/XAT/master/Resources/Images/XATIcon.png"
+        "DownloadLinkInstall": "https://github.com/Etheirys/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkTesting": "https://github.com/Etheirys/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "DownloadLinkUpdate": "https://github.com/Etheirys/XAT/releases/download/v1.0.0.0/XAT-Dalamud-Plugin.zip",
+        "IconUrl": "https://raw.githubusercontent.com/Etheirys/XAT/master/Resources/Images/XATIcon.png"
     }
 ]
