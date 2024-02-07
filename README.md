@@ -13,9 +13,9 @@ XAT aims to combine and improve on the previous disparate efforts for XIV animat
 The project is still a very early Alpha and documentation is still being worked on.  Join us on [Discord](https://discord.gg/KvGJCCnG8t).
 
 ## Components
-* [XAT Standalone](https://github.com/AsgardXIV/XAT/releases/latest/download/XAT.zip) (for creating animations etc). 
-* [Blender Addon](https://github.com/AsgardXIV/XAT/releases/latest/download/XAT-Blender-Addon.zip)
-* Dalamud Repo `https://raw.githubusercontent.com/AsgardXIV/XAT/main/repo.json`
+* [XAT Standalone](https://github.com/Etheirys/XAT/releases/latest/download/XAT.zip) (for creating animations etc). 
+* [Blender Addon](https://github.com/Etheirys/XAT/releases/latest/download/XAT-Blender-Addon.zip)
+* Dalamud Repo `https://raw.githubusercontent.com/Etheirys/XAT/main/repo.json`
 
 ## Contributing
 XAT is entirely open source and contributions are welcome.

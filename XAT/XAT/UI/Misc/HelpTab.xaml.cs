@@ -15,7 +15,7 @@ public partial class HelpTab : UserControl
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://github.com/AsgardXIV/XAT",
+            FileName = "https://github.com/Etheirys/XAT",
             UseShellExecute = true
         });
     }

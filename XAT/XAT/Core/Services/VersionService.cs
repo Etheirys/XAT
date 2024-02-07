@@ -26,7 +26,7 @@ public class VersionService : ServiceBase<VersionService>
         {
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
             AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) XAT Client";
-            AutoUpdater.Start("https://api.github.com/repos/AsgardXIV/XAT/releases/latest");
+            AutoUpdater.Start("https://api.github.com/repos/Etheirys/XAT/releases/latest");
         }
         
         return base.Start();

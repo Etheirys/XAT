@@ -7,8 +7,8 @@ bl_info = {
 	"location" : "3D View > Tools (Right Side) > XAT",
 	"warning" : "",
 	"category" : "Animation",
-	"wiki_url": 'https://github.com/AsgardXIV/XAT',
-    "tracker_url": 'https://github.com/AsgardXIV/XAT',
+	"wiki_url": 'https://github.com/Etheirys/XAT',
+    "tracker_url": 'https://github.com/Etheirys/XAT',
 }
 
 from . import xat
