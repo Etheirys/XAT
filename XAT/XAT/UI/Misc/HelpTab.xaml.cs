@@ -29,11 +29,11 @@ public partial class HelpTab : UserControl
         });
     }
 
-    private void KoFi_Click(object sender, System.Windows.RoutedEventArgs e)
+    private void MoreLinks_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://ko-fi.com/Asgard",
+            FileName = "https://etheirystools.carrd.co/",
             UseShellExecute = true
         });
     }

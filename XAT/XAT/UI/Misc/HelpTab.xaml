@@ -41,11 +41,11 @@
 
                     <Separator Opacity="0" Height="10" />
 
-                    <Button Click="KoFi_Click">
+                    <Button Click="MoreLinks_Click">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Dollar" Margin="-8" VerticalAlignment="Center" />
                             <Separator Opacity="0" Width="10" />
-                            <TextBlock>Ko-Fi</TextBlock>
+                            <TextBlock>More Links</TextBlock>
                         </StackPanel>
                     </Button>
                 </StackPanel>

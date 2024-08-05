@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Properties\icon.ico</ApplicationIcon>
-		<Copyright>Asgard</Copyright>
-		<Authors>Asgard</Authors>
+		<Copyright>Asgard, Minmoose and Contributors</Copyright>
+		<Authors>Asgard, Minmoose and Contributors</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,18 +22,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Autoupdater.NET.Official" Version="1.7.3" />
-		<PackageReference Include="Fody" Version="6.6.3">
+		<PackageReference Include="Autoupdater.NET.Official" Version="1.9.2" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+		<PackageReference Include="Serilog" Version="4.0.2-dev-02220" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="Fody" Version="6.8.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
-		<PackageReference Include="PropertyChanged.Fody" Version="3.4.1">
+		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Serilog" Version="2.11.0" />
-		<PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 
 </Project>

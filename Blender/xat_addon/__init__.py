@@ -1,7 +1,7 @@
 bl_info = {
 	"name" : "XAT",
-	"author" : "Asgard",
-	"description" : "Animations for FFXIV",
+	"author" : "Asgard, Minmoose and Contributors",
+	"description" : "Animation ToolKit for FFXIV",
 	"version": (1,0,0,0),
 	"blender" : (3, 0, 0),
 	"location" : "3D View > Tools (Right Side) > XAT",
