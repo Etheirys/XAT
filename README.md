@@ -6,15 +6,14 @@ XAT aims to combine and improve on the previous disparate efforts for XIV animat
 
 ## Getting Started
 ### Prerequisites
-* [.NET 8.x Desktop Runtime x64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.6-windows-x64-installer)
 * [Visual C++ Redistributable for Visual Studio 2012 x86](https://www.microsoft.com/en-ca/download/details.aspx?id=30679)
 
 ## Help
-The project is still in a very early Alpha and documentation is still being worked on.  Join us on [Discord](https://discord.gg/KvGJCCnG8t).
+The project is still in very early Alpha and documentation is still being worked on.  Join us on [Discord](https://discord.gg/KvGJCCnG8t).
 
 ## Components
 * [XAT APP](https://github.com/Etheirys/XAT/releases/latest/download/XAT.zip) (For creating animations etc). 
-* [Blender Addon](https://github.com/Etheirys/XAT/releases/latest/download/XAT-Blender-Addon.zip) (For exporting a Blender camera as a cutscene that can be played with [Brio](https://github.com/Etheirys/Brio)).
+* [Blender Addon](https://github.com/Etheirys/XAT/releases/latest/download/XAT-Blender-Addon.zip) (For exporting a Blender camera as a cutscene that can be played with **[Brio](https://github.com/Etheirys/Brio)**).
 
 ## Acknowledgments
 This project builds on the work of previous research and tools built for XIV. A huge thank you is due to the following projects for making XAT possible.
