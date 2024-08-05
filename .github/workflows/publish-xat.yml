@@ -26,36 +26,13 @@ jobs:
         dotnet-version: 8.0.x
    
     - name: Deploy XAT
-      run: dotnet publish XAT/XAT.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish /p:Version=${{ steps.version-date.outputs.formattedTime }}
-
-    - name: Download Dalamud
-      run: |
-        Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/stg/latest.zip -OutFile latest.zip
-        Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev"
-
-    - name: Deploy XAT Dalamud
-      run: dotnet publish Dalamud/XAT.Plugin.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish /p:Version=${{ steps.version-date.outputs.formattedTime }}
-
-    - name: Write version into Dalamud json
-      run: |
-        $ver = '${{ steps.version-date.outputs.formattedTime }}'
-        $path = './publish-dalamud/XAT.Plugin.json'
-        $content = get-content -path $path
-        $content = $content -replace '1.0.0.0',$ver
-        set-content -Path $path -Value $content
+      run: dotnet publish XAT/XAT.sln /p:DebugType=None /p:DebugSymbols=false /p:PublishProfile=FinalPublish.pubxml /p:Version=${{ steps.version-date.outputs.formattedTime }}
 
     - name: Zip Standalone Release
       uses: TheDoctor0/zip-release@0.6.0
       with:
         filename: '../XAT.zip'
         directory: './publish-standalone/'
-        exclusions: '*.pdb* *.xml*'
-
-    - name: Zip Dalamud Release
-      uses: TheDoctor0/zip-release@0.6.0
-      with:
-        filename: '../XAT-Dalamud-Plugin.zip'
-        directory: './publish-dalamud/'
         exclusions: '*.pdb* *.xml*'
 
     - name: Write out Blender version
@@ -78,20 +55,11 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
-        artifacts: "XAT.zip,XAT-Blender-Addon.zip,XAT-Dalamud-Plugin.zip"
+        artifacts: "XAT.zip,XAT-Blender-Addon.zip"
         name: ${{ steps.version-date.outputs.formattedTime }}
         tag: v${{ steps.version-date.outputs.formattedTime }}
         draft: false
         token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Write out Dalamud version
-      run: |
-        $ver = '${{ steps.version-date.outputs.formattedTime }}'
-        $path = './base_repo.json'
-        $new_path = './repo.json'
-        $content = get-content -path $path
-        $content = $content -replace '1.0.0.0',$ver
-        set-content -Path $new_path -Value $content
 
     - name: Commit repo.json
       run: |
