@@ -13,3 +13,4 @@ obj/
 *.opensdf
 *.pdb
 /publish-standalone
+/publish-dalamud
