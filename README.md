@@ -4,6 +4,8 @@ XAT or, more formally titled, The XIV Animation Toolkit, is a standalone tool fo
 
 XAT aims to combine and improve on the previous disparate efforts for XIV animation tools, and is intended to be developed and supported over time.
 
+## **The XAT.Plugin Dalamud Plugin** has been murged into Brio, find out how to install Brio [here](https://etheirys-tools.gitbook.io/brio)
+
 ## Getting Started
 ### Prerequisites
 * [Visual C++ Redistributable for Visual Studio 2012 x86](https://www.microsoft.com/en-ca/download/details.aspx?id=30679)
