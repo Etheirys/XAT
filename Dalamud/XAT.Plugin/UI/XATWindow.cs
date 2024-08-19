@@ -16,14 +16,14 @@ public class XATWindow : Window
 
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(520, 265),
-            MaximumSize = new Vector2(520, 265)
+            MinimumSize = new Vector2(520, 360),
+            MaximumSize = new Vector2(520, 360)
         };
     }
 
     public override void Draw()
     {
-        var segmentSize = ImGui.GetWindowSize().X / 3.45f;
+        var segmentSize = ImGui.GetWindowSize().X / 4.5f;
         var buttonSize = new Vector2(segmentSize, ImGui.GetTextLineHeight() * 1.8f);
 
         using (var textGroup = ImRaii.Group())
@@ -32,20 +32,24 @@ public class XATWindow : Window
             {
                 var text = $"""
 
-                    The XAT Plugin has been merged with Brio 0.4.0!
+                    The XAT Plugin has been merged into Brio 0.4.0!
 
                     Once you have installed Brio you can find the XAT Cutscene Control
                     under the `Advanced Animation Control` Window, found by clicking
                     the 'point up-right' button on the Animation Control Tab!
 
-                    For additional help, you may DM me on Twitter/Discord or, join the Discord.
+                    For additional help, you can view the help page,
+                    you may DM me on Twitter/Discord or, join the Discord.
+
+                    After you have installed Brio, please uninstall the XAT plugin!
 
                     Thank You!
 
 
+
                     """;
 
-                ImGui.PushTextWrapPos(segmentSize * 3);
+                ImGui.PushTextWrapPos(segmentSize * 4);
                 ImGui.TextWrapped(text);
                 ImGui.PopTextWrapPos();
             }
@@ -69,6 +73,12 @@ public class XATWindow : Window
             ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0, 100, 255, 255) / 255);
             if (ImGui.Button("View my Twitter", buttonSize))
                 Process.Start(new ProcessStartInfo { FileName = "https://twitter.com/MiniatureMoosey", UseShellExecute = true });
+            ImGui.PopStyleColor();
+            ImGui.SameLine();
+
+            ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(110, 84, 148, 255) / 255);
+            if (ImGui.Button("View Help page", buttonSize))
+                Process.Start(new ProcessStartInfo { FileName = "https://etheirys-tools.gitbook.io/brio", UseShellExecute = true });
             ImGui.PopStyleColor();
             ImGui.SameLine();
         }
