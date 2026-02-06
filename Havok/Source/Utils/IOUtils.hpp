@@ -7,8 +7,6 @@
 class IOUtils
 {
 public:
-	static int FileSize(std::string const& filePath);
-
 	static void ReadStreamIntoVector(std::vector<char>& vec, std::ifstream& stream, int count);
 	static void WriteVectorIntoStream(std::vector<char>& vec, std::ofstream& stream, int count);
 

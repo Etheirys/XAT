@@ -3,19 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-int IOUtils::FileSize(std::string const& filePath)
-{
-    std::streampos fsize = 0;
-    std::ifstream file(filePath, std::ios::binary);
-
-    fsize = file.tellg();
-    file.seekg(0, std::ios::end);
-    fsize = file.tellg() - fsize;
-    file.close();
-
-    return (int) fsize;
-}
-
 void IOUtils::ReadStreamIntoVector(std::vector<char>& vec, std::ifstream& stream, int count) {
     vec.clear();
     vec.reserve(count);
