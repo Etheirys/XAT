@@ -1,10 +1,18 @@
+#include <codecvt>
 #include <iostream>
+#include <locale>
 #include <vector>
 
 #include "FatalException.hpp"
 #include "Commands.hpp"
 
-int main(int argc, char* argv[])
+static std::string ToString(const std::wstring& string)
+{
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+	return  conv.to_bytes(string);
+}
+
+int wmain(int argc, wchar_t* argv[])
 {
 	if (argc <= 1)
 	{
@@ -12,14 +20,14 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::string command = argv[1];
+	std::string command = ToString(argv[1]);
 	std::vector<std::string> arguments;
 
 	if (argc >= 3)
 	{
 		for (int i = 2; i < argc; ++i)
 		{
-			arguments.push_back(argv[i]);
+			arguments.push_back(ToString(argv[i]));
 		}
 	}
 	
