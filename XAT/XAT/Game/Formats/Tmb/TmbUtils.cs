@@ -53,8 +53,16 @@ public static class TmbUtils
         { C188Format.MAGIC, typeof(C188Format) },
         { C198Format.MAGIC, typeof(C198Format) },
         { C203Format.MAGIC, typeof(C203Format) },
+        { C202Format.MAGIC, typeof(C202Format) },
         { C204Format.MAGIC, typeof(C204Format) },
         { C211Format.MAGIC, typeof(C211Format) },
+
+        { C194Format.MAGIC, typeof(C194Format) },
+        { C212Format.MAGIC, typeof(C212Format) },
+        { C215Format.MAGIC, typeof(C215Format) },
+        { C216Format.MAGIC, typeof(C216Format) },
+        { C230Format.MAGIC, typeof(C230Format) },
+        { C234Format.MAGIC, typeof(C234Format) },
     };
 
     public static ReadOnlyDictionary<string, Type> ItemTypes = new(ItemTypesRaw);
