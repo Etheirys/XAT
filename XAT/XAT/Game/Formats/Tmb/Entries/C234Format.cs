@@ -14,7 +14,7 @@ public class C230Format : TmbEntry
     public override int TimelineCount => 0;
 
     [UserType]
-    public bool Enabled { get; set; } = 0;
+    public bool Enabled { get; set; } = false;
 
     [UserType]
     public int Unk2 { get; set; } = 0;
