@@ -15,7 +15,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="XAT - The XIV Animation Toolkit" 
+        Title="XAT - XIV Animation Toolkit" 
         Height="615" Width="900" MinHeight="615" MinWidth="900"
         >
     <Grid Name="ContentArea">
