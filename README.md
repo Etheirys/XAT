@@ -1,10 +1,9 @@
-## XAT - The XIV Animation Toolkit
+## XAT - XIV Animation Toolkit ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Etheirys/XAT/total?style=flat) ![GitHub License](https://img.shields.io/github/license/Etheirys/XAT?style=flat) ![Bluesky followers](https://img.shields.io/bluesky/followers/minmoose.bsky.social?style=flat&label=bluesky%20followers) ![Discord](https://img.shields.io/discord/1198316676865867776)
 
-XAT or, more formally titled, The XIV Animation Toolkit, is a standalone tool for manipulating animations and skeletons in Final Fantasy XIV. It provides various techniques to export, import, compress and bind animations to and from a variety of formats.
 
-XAT aims to combine and improve on the previous disparate efforts for XIV animation tools, and is intended to be developed and supported over time.
-
-## **The XAT.Plugin Dalamud Plugin** has been murged into Brio, find out how to install Brio [here](https://etheirys-tools.gitbook.io/brio)
+> XAT or, more formally titled, XIV Animation Toolkit, is a standalone tool for manipulating animations and skeletons in Final Fantasy XIV. It provides various techniques to export, import, compress and bind animations to and from a variety of formats.
+> 
+> XAT aims to combine and improve on the previous disparate efforts for XIV animation tools, and is intended to be developed and supported over time.
 
 ## Getting Started
 ### Prerequisites
